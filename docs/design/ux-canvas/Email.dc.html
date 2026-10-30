@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Email settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; } *::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #212529; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn.primary { border-color: #0c8577; background: #0c8577; color: #fff; }
+.card { display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; }
+.card h2 { margin: 0; font-size: 15px; font-weight: 700; }
+.muted { font-size: 13px; color: #505756; line-height: 1.5; margin: 0; }
+.step { display: flex; gap: 10px; font-size: 13px; line-height: 1.5; }
+.step b { flex: none; width: 22px; height: 22px; border-radius: 999px; background: #ecf7f6; color: #0a6f63; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+.trow { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-top: 1px solid #e5e7eb; }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <dc-import name="Sidebar" active="Settings" hint-size="232px,100%"></dc-import>
+  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+    <header style="flex: none; display: flex; align-items: center; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;"><span style="width: 420px; height: 36px; display: flex; align-items: center; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;">Search tickets</span></header>
+    <div style="flex: 1; min-height: 0; display: flex;">
+      <dc-import name="SettingsMenu" active="Email" hint-size="220px,100%"></dc-import>
+      <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+        <main style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 22px 28px 24px; box-sizing: border-box; max-width: 900px;">
+          <h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1d2026;">Email</h1>
+          <section class="card" style="border-color: #added9;">
+            <h2>Your support address</h2>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 10px; background: #ecf7f6;">
+              <code style="font-size: 16px; font-weight: 600; color: #0a6f63;">hptech@in.dev.helpdesk.example.com</code>
+              <div style="flex-grow: 1;"></div>
+              <button class="btn" onClick="{{copy}}">{{copyLabel}}</button>
+              <button class="btn">Send me a test email</button>
+            </div>
+            <p class="muted">Every email sent to this address becomes a ticket, and replies from your team go out from it.</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 13px; font-weight: 600;">Use your own address (for example support@hptech.com)</span>
+              <div class="step"><b>1</b><span>In your email provider (Google Workspace, Microsoft 365 or other), open the settings of support@hptech.com.</span></div>
+              <div class="step"><b>2</b><span>Forward all its email to the address above.</span></div>
+              <div class="step"><b>3</b><span>Send a test email to support@hptech.com; it appears in Tickets within a minute.</span></div>
+            </div>
+          </section>
+          <section class="card">
+            <h2>Sender name</h2>
+            <p class="muted">The name customers see on replies and forwards. Leave it empty to use the workspace name.</p>
+            <label style="display: flex; flex-direction: column; gap: 6px; max-width: 420px; font-size: 13px;"><span style="font-weight: 500;">Sender name</span><input value="HpTech Support" oninput="" style="height: 38px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; font-size: 14px;"></label>
+            <span style="font-size: 12px; color: #676d7b;">Customers see: "HpTech Support" &lt;hptech@in.dev.helpdesk.example.com&gt;</span>
+          </section>
+          <section class="card">
+            <h2>Customer emails</h2>
+            <p class="muted">Sent to the requester from your support address. Replies from your team always go out.</p>
+            <sc-for list="{{emails}}" as="e" hint-placeholder-count="3">
+              <div class="trow">
+                <div style="flex-grow: 1;"><b style="font-size: 14px;">{{e.title}}</b><p class="muted" style="font-size: 12px;">{{e.desc}}</p></div>
+                <button role="switch" aria-checked="{{e.on}}" aria-label="{{e.title}}" onClick="{{e.toggle}}" style="{{e.style}}"><span style="{{e.knob}}"></span></button>
+              </div>
+            </sc-for>
+          </section>
+        </main>
+        <sc-if value="{{dirty}}" hint-placeholder-val="{{false}}">
+          <div style="flex: none; display: flex; align-items: center; gap: 10px; padding: 12px 28px; background: #ecf7f6; border-top: 1px solid #added9;">
+            <span style="flex-grow: 1; font-size: 13px; font-weight: 600; color: #0a6f63;">You have unsaved changes</span>
+            <button class="btn" onClick="{{discard}}">Discard</button>
+            <button class="btn primary" onClick="{{discard}}">Save changes</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { on: [true, true, false], dirty: false, copied: false }; }
+  renderVals() {
+    const list = [
+      ['Request received', 'For tickets raised by email or the web form: their ticket number, and that you will reply.'],
+      ['Ticket resolved', 'When a ticket is resolved; replying opens it again.'],
+      ['Ticket opened for you', 'When someone on your team logs a ticket for a customer, for example after a call.'],
+    ];
+    const emails = list.map(([title, desc], i) => {
+      const on = this.state.on[i];
+      return {
+        title, desc, on: on ? 'true' : 'false',
+        style: 'position:relative;flex:none;width:40px;height:24px;border:0;border-radius:999px;cursor:pointer;background:' + (on ? '#0c8577' : '#d1d5db'),
+        knob: 'position:absolute;top:3px;left:' + (on ? '19px' : '3px') + ';width:18px;height:18px;border-radius:999px;background:#fff',
+        toggle: () => { const next = [...this.state.on]; next[i] = !next[i]; this.setState({ on: next, dirty: true }); },
+      };
+    });
+    return {
+      emails, dirty: this.state.dirty, copyLabel: this.state.copied ? 'Copied' : 'Copy address',
+      copy: () => this.setState({ copied: true }),
+      discard: () => this.setState({ on: [true, true, false], dirty: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+# TEMPORARY dev setup: the dev server's web server (Caddy).
+# One HTTPS certificate covers the main address and every workspace address (*.<dev domain>,
+# mail. included). Caddy only serves it: certificate.sh gets and renews it from a developer's
+# computer, because proving a wildcard needs a DNS change only the developer's AWS access may make.
+
+# The shared snippets: (app) and (mailbox).
+import site.caddy
+
+(certificate) {
+	tls /certs/helpdesk.crt /certs/helpdesk.key
+}
+
+# "mail" is a reserved workspace address, so it never clashes with a workspace.
+mail.{$HELPDESK_DOMAIN} {
+	import certificate
+	import mailbox
+}
+
+# The main address and every workspace address. An address that is no workspace shows the app's
+# own "workspace not found" page.
+{$HELPDESK_DOMAIN}, *.{$HELPDESK_DOMAIN} {
+	import certificate
+	import app
+}

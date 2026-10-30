@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New ticket</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+a { color: #0a6f63; } a:hover { color: #053c36; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+*::-webkit-scrollbar-thumb:hover { background: #9aa1ab; }
+.ic { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nav { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px; border-radius: 8px; color: #afc2d6; font-size: 14px; font-weight: 500; text-decoration: none; }
+.nav.on { background: rgba(255,255,255,0.14); color: #fff; box-shadow: inset 3px 0 0 #added9; }
+.lbl { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #1d2026; }
+.inp { height: 38px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; font: inherit; font-size: 14px; color: #212529; box-sizing: border-box; }
+.hint { font-size: 12px; font-weight: 400; color: #676d7b; }
+.prop { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 8px; min-height: 38px; font-size: 13px; color: #676d7b; }
+.val { display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 10px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; color: #212529; font: inherit; font-size: 13px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #212529; font: inherit; font-size: 14px; font-weight: 500; }
+.btn.primary { border-color: #0c8577; background: #0c8577; color: #fff; }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <aside style="flex: 0 0 232px; display: flex; flex-direction: column; gap: 4px; padding: 16px 12px; background: #053c36; box-sizing: border-box; overflow-y: auto;">
+    <img src="/_blob/8bf4d583b302740e0d6706384007c2fa" alt="Helpdesk" style="height: 32px; width: auto; align-self: flex-start; margin: 4px 4px 20px;">
+    <a class="nav" href="Home.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Home</a>
+    <a class="nav on" href="Main.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>Tickets</a>
+    <a class="nav" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Contacts</a>
+    <a class="nav" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 12h4"></path><path d="M10 8h4"></path><path d="M14 21v-3a2 2 0 0 0-4 0v3"></path><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path></svg>Companies</a>
+  </aside>
+  <div style="flex: 999 1 560px; min-width: 0; min-height: 0; overflow-y: auto; display: flex; flex-direction: column;">
+    <header style="position: sticky; top: 0; z-index: 6; flex: none; display: flex; align-items: center; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box; gap: 16px;">
+      <span style="display: flex; align-items: center; gap: 8px; width: 420px; max-width: 100%; height: 36px; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;">Search tickets</span>
+      <div style="flex-grow: 1;"></div>
+      <div style="width: 32px; height: 32px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">HP</div>
+    </header>
+    <main style="display: flex; flex-direction: column; gap: 16px; padding: 20px 24px 0; box-sizing: border-box; flex-grow: 1;">
+      <div style="display: flex; align-items: center; gap: 10px;"><a href="Main.dc.html" aria-label="Back to tickets" style="display: inline-flex; color: #505756;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px;"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></a><h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1d2026;">New ticket</h1></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <section style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px; padding: 20px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+          <label class="lbl">Requester<button class="inp" style="display: flex; align-items: center; justify-content: space-between; text-align: left; color: #676d7b;">Choose a contact or add a new one<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><span class="hint">Who raised this ticket.</span></label>
+          <label class="lbl">Subject <input class="inp" aria-required="true" placeholder="A short summary of the request"></label>
+          <label class="lbl">Description<textarea class="inp" style="height: 240px; padding: 10px 12px; resize: vertical;" placeholder="What the customer needs, in their words if you have them"></textarea></label>
+          <button class="btn" style="align-self: flex-start;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"></path></svg>Attach files</button>
+        </section>
+        <aside style="flex: 1 1 300px; max-width: 340px; display: flex; flex-direction: column; padding: 14px 16px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+          <h2 style="margin: 0 0 6px; font-size: 14px; font-weight: 700; color: #1d2026;">Properties</h2>
+          <div class="prop">Status<span class="val">Open<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div>
+          <div class="prop">Priority<span class="val">Medium<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div>
+          <div class="prop">Type<span class="val" style="color: #676d7b;">No type<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div>
+          <div class="prop">Team<span class="val" style="color: #676d7b;">No team<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div>
+          <div class="prop">Assignee<span class="val" style="color: #676d7b;">Unassigned<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div>
+          <div class="prop">Tags<span class="val" style="color: #676d7b;">Add tags</span></div>
+          <div style="margin: 8px 0 2px; padding-top: 8px; border-top: 1px solid #e5e7eb; font-size: 11px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em;">YOUR FIELDS</div>
+          <div class="prop">Module<span class="val" style="color: #676d7b;">Choose<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span></div>
+          <div class="prop">Employee ID<span class="val" style="color: #676d7b;">Add</span></div>
+        </aside>
+      </div>
+      <div style="flex-grow: 1;"></div>
+      <div style="position: sticky; bottom: 0; display: flex; justify-content: flex-end; gap: 10px; padding: 12px 0; margin: 0 -24px; padding-right: 24px; background: #fff; border-top: 1px solid #e5e7eb;">
+        <a href="Main.dc.html" class="btn" style="text-decoration: none;">Cancel</a>
+        <a href="TicketPage.dc.html" class="btn primary" style="text-decoration: none;">Create ticket</a>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

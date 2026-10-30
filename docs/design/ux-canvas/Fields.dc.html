@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fields</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; } *::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #212529; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn.primary { border-color: #0c8577; background: #0c8577; color: #fff; }
+.tab { height: 38px; padding: 0 14px; border: 0; border-bottom: 2px solid transparent; background: none; font: inherit; font-size: 14px; font-weight: 500; color: #505756; }
+.tab.on { border-bottom-color: #0c8577; color: #0a6f63; }
+.frow { display: grid; grid-template-columns: 24px minmax(0, 1fr) 150px 130px 40px; align-items: center; gap: 12px; padding: 11px 16px; border-top: 1px solid #e5e7eb; font-size: 13px; }
+.chip { display: inline-flex; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; background: #f1f3f5; color: #495057; }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <dc-import name="Sidebar" active="Settings" hint-size="232px,100%"></dc-import>
+  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+    <header style="flex: none; display: flex; align-items: center; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;"><span style="width: 420px; height: 36px; display: flex; align-items: center; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;">Search tickets</span></header>
+    <div style="flex: 1; min-height: 0; display: flex;">
+      <dc-import name="SettingsMenu" active="Fields" hint-size="220px,100%"></dc-import>
+      <main style="flex: 1; min-width: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 22px 28px 24px; box-sizing: border-box;">
+        <div style="display: flex; align-items: center; gap: 10px;"><h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1d2026;">Fields</h1><div style="flex-grow: 1;"></div><button class="btn primary">+ Add field</button></div>
+        <div style="display: flex; border-bottom: 1px solid #e5e7eb;"><button class="tab on">Tickets</button><button class="tab">Contacts</button><button class="tab">Companies</button></div>
+        <section style="background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
+          <div style="display: flex; align-items: baseline; gap: 10px; padding: 14px 16px;"><h2 style="margin: 0; font-size: 15px; font-weight: 700;">Your fields</h2><span style="font-size: 12px; color: #676d7b;">2 of 50 · shown on ticket forms in this order · drag to reorder</span></div>
+          <div class="frow" style="background: #f5f6f8; font-size: 11px; font-weight: 600; color: #676d7b;"><span></span><span>LABEL</span><span>TYPE</span><span>REQUIRED</span><span></span></div>
+          <div class="frow"><span style="color: #adb5bd;">⋮⋮</span><span><b>Module</b> <code style="font-size: 11px; color: #676d7b;">module</code></span><span>Dropdown · 5 choices</span><span class="chip">Optional</span><button class="btn" aria-label="More actions" style="width: 34px; padding: 0; justify-content: center;">⋯</button></div>
+          <div class="frow"><span style="color: #adb5bd;">⋮⋮</span><span><b>Employee ID</b> <code style="font-size: 11px; color: #676d7b;">employee_id</code></span><span>Text</span><span class="chip">Optional</span><button class="btn" aria-label="More actions" style="width: 34px; padding: 0; justify-content: center;">⋯</button></div>
+        </section>
+        <section style="background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
+          <button onClick="{{toggle}}" aria-expanded="{{open}}" style="display: flex; align-items: center; gap: 10px; width: 100%; padding: 14px 16px; border: 0; background: none; font: inherit; text-align: left; cursor: pointer;"><span style="color: #676d7b;">{{arrow}}</span><b style="font-size: 15px;">Standard fields</b><span style="font-size: 12px; color: #676d7b;">9 built in · always on the ticket form · can't be changed</span></button>
+          <sc-if value="{{open}}" hint-placeholder-val="{{false}}">
+            <sc-for list="{{std}}" as="s" hint-placeholder-count="9">
+              <div class="frow" style="color: #505756;"><span>🔒</span><span><b style="color: #212529;">{{s.label}}</b> · {{s.desc}}</span><span>{{s.type}}</span><span class="chip">{{s.req}}</span><span></span></div>
+            </sc-for>
+          </sc-if>
+        </section>
+      </main>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { open: false }; }
+  renderVals() {
+    const std = [
+      ['Requester', 'a contact, or a new one by name and email', 'Contact', 'Required'], ['Subject', 'up to 200 characters', 'Text', 'Required'],
+      ['Description', 'the first message', 'Paragraph', 'Optional'], ['Status', 'starts Open', 'Choice', 'Required'], ['Priority', 'starts Medium', 'Choice', 'Required'],
+      ['Type', 'question, incident, problem, feature request', 'Choice', 'Optional'], ['Team', 'one of your teams', 'Team', 'Optional'],
+      ['Assignee', 'an active member', 'Person', 'Optional'], ['Tags', 'up to 20', 'Tags', 'Optional'],
+    ].map(([label, desc, type, req]) => ({ label, desc, type, req }));
+    return { std, open: this.state.open, arrow: this.state.open ? '▾' : '▸', toggle: () => this.setState({ open: !this.state.open }) };
+  }
+}
+</script>
+</body>
+</html>

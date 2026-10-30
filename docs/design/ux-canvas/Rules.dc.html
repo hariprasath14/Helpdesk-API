@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rules</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; } *::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #212529; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn.primary { border-color: #0c8577; background: #0c8577; color: #fff; }
+.rrow { display: grid; grid-template-columns: 28px minmax(0, 1fr) 44px 64px; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #e5e7eb; }
+.rrow:hover { background: #f5f6f8; }
+.name { border: 0; background: none; padding: 0; font: inherit; font-size: 14px; font-weight: 600; color: #0a6f63; text-align: left; cursor: pointer; }
+.sent { font-size: 12px; color: #505756; margin-top: 3px; }
+.tok { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; font-size: 13px; font-weight: 500; }
+.val { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 6px; background: #ecf7f6; color: #0a6f63; font-size: 13px; font-weight: 500; }
+.line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
+.rm { margin-left: auto; border: 0; background: none; font: inherit; font-size: 12px; color: #676d7b; cursor: pointer; }
+.add { border: 0; background: none; padding: 0; font: inherit; font-size: 13px; font-weight: 600; color: #0a6f63; cursor: pointer; }
+</style>
+</helmet>
+<div style="position: relative; display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <dc-import name="Sidebar" active="Settings" hint-size="232px,100%"></dc-import>
+  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+    <header style="flex: none; display: flex; align-items: center; gap: 16px; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;">
+      <span style="display: flex; align-items: center; width: 420px; max-width: 100%; height: 36px; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;">Search tickets</span>
+      <div style="flex-grow: 1;"></div>
+      <span style="width: 32px; height: 32px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">HP</span>
+    </header>
+    <div style="flex: 1; min-height: 0; display: flex;">
+      <dc-import name="SettingsMenu" active="Rules" hint-size="220px,100%"></dc-import>
+      <main style="flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 12px; padding: 22px 28px 24px; box-sizing: border-box;">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+          <h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1d2026;">Rules</h1><span style="font-size: 13px; color: #676d7b;">5 rules · 4 on</span>
+          <div style="flex-grow: 1;"></div>
+          <button class="btn primary" onClick="{{openNew}}">+ New rule</button>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #505756;">Rules run from top to bottom when their event happens; each sees what the ones above changed. Drag the handle to change the order.</p>
+        <div style="flex: 1; min-height: 0; overflow-y: auto; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+          <sc-for list="{{rules}}" as="r" hint-placeholder-count="5">
+            <div class="rrow">
+              <span aria-label="Drag to reorder" style="color: #adb5bd; font-size: 16px; cursor: grab; text-align: center;">⋮⋮</span>
+              <div style="min-width: 0;"><button class="name" onClick="{{r.open}}">{{r.name}}</button><div class="sent">{{r.sentence}}</div></div>
+              <span role="switch" aria-checked="{{r.on}}" aria-label="{{r.switchLabel}}" style="{{r.switchStyle}}"><span style="{{r.knobStyle}}"></span></span>
+              <button class="btn" aria-label="More actions" style="width: 34px; padding: 0; justify-content: center;">⋯</button>
+            </div>
+          </sc-for>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <sc-if value="{{drawer}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; inset: 0; background: rgba(17,24,39,0.45); display: flex; justify-content: flex-end;">
+      <section style="width: 640px; max-width: 100%; height: 100%; display: flex; flex-direction: column; background: #fff; box-shadow: 0 12px 32px rgba(16,24,40,0.14);">
+        <div style="flex: none; display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid #e5e7eb;">
+          <h2 style="margin: 0; font-size: 17px; font-weight: 700; flex-grow: 1;">{{drawerTitle}}</h2>
+          <button onClick="{{close}}" aria-label="Close" style="border: 0; background: none; font-size: 20px; color: #676d7b; cursor: pointer;">×</button>
+        </div>
+        <div style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; padding: 18px 20px;">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500;">Name<input value="Billing questions to the Billing team" style="height: 38px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; font-size: 14px;"></label>
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 12px; background: #f5f6f8;">
+            <div class="line"><b style="width: 40px;">When</b><span class="tok">a ticket is created ▾</span></div>
+            <div class="line"><b style="width: 40px;">If</b><span class="tok">any ▾</span><span style="color: #505756;">of these are true</span></div>
+            <div class="line" style="padding-left: 48px;"><span class="tok">Subject or description ▾</span><span class="tok">contains any of ▾</span><span class="val">invoice ×</span><span class="val">billing ×</span><span class="val">payment ×</span><button class="rm">Remove</button></div>
+            <div style="padding-left: 48px;"><button class="add">+ Add condition</button></div>
+            <div class="line" style="margin-top: 6px;"><b style="width: 40px;">Then</b><span class="tok">Set team ▾</span><span class="tok">Billing ▾</span><button class="rm">Remove</button></div>
+            <div class="line" style="padding-left: 48px;"><span class="tok">Add tags ▾</span><span class="val">billing ×</span><button class="rm">Remove</button></div>
+            <div style="padding-left: 48px;"><button class="add">+ Add action</button></div>
+          </div>
+          <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 13px;"><input type="checkbox" checked style="accent-color: #0c8577; margin-top: 2px;"><span><b>Stop here</b><br><span style="color: #676d7b;">Rules below this one don't run for a ticket this rule matched.</span></span></label>
+          <div style="padding: 12px 14px; border: 1px dashed #d1d5db; border-radius: 10px; font-size: 13px; color: #505756;"><b style="color: #1d2026;">Try it on a ticket.</b> Enter a ticket number to see whether this rule would match and what it would change. <span style="color: #0a6f63; font-weight: 600;">Test rule</span></div>
+        </div>
+        <div style="flex: none; display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-top: 1px solid #added9; background: #ecf7f6;">
+          <span style="flex-grow: 1; font-size: 12px; font-weight: 600; color: #0a6f63;">Unsaved changes</span>
+          <button class="btn" onClick="{{close}}">Cancel</button>
+          <button class="btn primary" onClick="{{close}}">Save rule</button>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { drawer: null }; }
+  renderVals() {
+    const list = [
+      ['Billing questions to the Billing team', 'When a ticket is created · if subject or description contains invoice, billing or payment → set team Billing, add tag billing · stops here', true],
+      ['Attendance issues to Attendance', 'When a ticket is created · if subject or description contains attendance, punch or geofence → assign in turn within Attendance', true],
+      ['Urgent tickets: tell the team leads', 'When a ticket is changed · if priority is Urgent → add tag urgent, email the team leads', true],
+      ['Remind after 3 days waiting', 'Every 15 minutes · if status is Waiting on customer for 72 hours → email the requester', true],
+      ['Close after 7 days waiting', 'Every 15 minutes · if status is Waiting on customer for 168 hours → set status Closed', false],
+    ];
+    const rules = list.map(([name, sentence, on]) => ({
+      name, sentence, on: on ? 'true' : 'false', switchLabel: name + (on ? ' is on' : ' is off'),
+      switchStyle: 'position:relative;display:inline-block;width:38px;height:22px;border-radius:999px;background:' + (on ? '#0c8577' : '#d1d5db'),
+      knobStyle: 'position:absolute;top:3px;left:' + (on ? '19px' : '3px') + ';width:16px;height:16px;border-radius:999px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.2)',
+      open: () => this.setState({ drawer: 'Edit ' + name }),
+    }));
+    return {
+      rules, drawer: this.state.drawer !== null, drawerTitle: this.state.drawer,
+      openNew: () => this.setState({ drawer: 'New rule' }),
+      close: () => this.setState({ drawer: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>

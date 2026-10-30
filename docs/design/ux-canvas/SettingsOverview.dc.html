@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings overview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+a { color: #0a6f63; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; } *::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+.ic { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nav { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px; border-radius: 8px; color: #afc2d6; font-size: 14px; font-weight: 500; text-decoration: none; }
+.nav.on { background: rgba(255,255,255,0.14); color: #fff; box-shadow: inset 3px 0 0 #added9; }
+.grp { padding: 14px 10px 4px; font-size: 11px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em; }
+.sm { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 6px; font-size: 13px; color: #212529; text-decoration: none; }
+.sm:hover { background: #f1f3f5; }
+.sm .ic { color: #676d7b; }
+.tile { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; text-decoration: none; color: #212529; }
+.tile:hover { border-color: #added9; }
+.tile .box { width: 34px; height: 34px; border-radius: 10px; background: #ecf7f6; color: #0a6f63; display: flex; align-items: center; justify-content: center; flex: none; }
+.tile b { display: block; font-size: 14px; color: #1d2026; margin-bottom: 2px; }
+.tile span { font-size: 12px; color: #676d7b; line-height: 1.45; }
+.gh { margin: 8px 0 0; font-size: 12px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <aside style="flex: 0 0 232px; display: flex; flex-direction: column; gap: 4px; padding: 16px 12px; background: #053c36; box-sizing: border-box;">
+    <img src="/_blob/8bf4d583b302740e0d6706384007c2fa" alt="Helpdesk" style="height: 32px; width: auto; align-self: flex-start; margin: 4px 4px 20px;">
+    <a class="nav" href="Home.dc.html">Home</a>
+    <a class="nav" href="Main.dc.html">Tickets</a>
+    <a class="nav" href="Contact.dc.html">Contacts</a>
+    <a class="nav" href="Contact.dc.html">Companies</a>
+    <div style="flex-grow: 1;"></div>
+    <a class="nav on" href="SettingsOverview.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path><circle cx="12" cy="12" r="3"></circle></svg>Settings</a>
+  </aside>
+  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+    <header style="flex: none; display: flex; align-items: center; gap: 16px; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;">
+      <span style="display: flex; align-items: center; width: 420px; max-width: 100%; height: 36px; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;">Search tickets</span>
+      <div style="flex-grow: 1;"></div>
+      <span style="width: 32px; height: 32px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">HP</span>
+    </header>
+    <div style="flex: 1; min-height: 0; display: flex;">
+      <nav aria-label="Settings" style="flex: 0 0 220px; overflow-y: auto; padding: 12px 10px; background: #fff; border-right: 1px solid #e5e7eb; box-sizing: border-box;">
+        <a class="sm" href="SettingsOverview.dc.html" style="background: #ecf7f6; color: #0a6f63; font-weight: 600;">All settings</a>
+        <div class="grp">TEAM</div>
+        <a class="sm" href="#members"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path></svg>Members</a>
+        <a class="sm" href="#teams"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0"></path><circle cx="10" cy="8" r="5"></circle><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"></path></svg>Teams</a>
+        <div class="grp">TICKETS</div>
+        <a class="sm" href="Fields.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5H3"></path><path d="M11 12H3"></path><path d="M16 19H3"></path><path d="M18 9v6"></path><path d="M21 12h-6"></path></svg>Fields</a>
+        <a class="sm" href="#canned"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"></path><path d="M7 11h10"></path><path d="M7 7h8"></path></svg>Canned responses</a>
+        <div class="grp">AUTOMATION</div>
+        <a class="sm" href="Rules.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"></rect><path d="M7 11v4a2 2 0 0 0 2 2h4"></path><rect width="8" height="8" x="13" y="13" rx="2"></rect></svg>Rules</a>
+        <a class="sm" href="Slas.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="15" y1="14" y2="11"></line><circle cx="12" cy="14" r="8"></circle></svg>SLAs</a>
+        <a class="sm" href="#hours"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 14v2.2l1.6 1"></path><path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338"></path><path d="M3 9h5.859"></path><circle cx="16" cy="16" r="6"></circle></svg>Business hours</a>
+        <div class="grp">CHANNELS</div>
+        <a class="sm" href="Email.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>Email</a>
+        <a class="sm" href="WebForm.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l6 6v12a2 2 0 0 1-2 2z"></path><path d="M14 2v6h6"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>Web form</a>
+        <div class="grp">WORKSPACE</div>
+        <a class="sm" href="#security"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>Security</a>
+        <a class="sm" href="#audit"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 12h-5"></path><path d="M15 8h-5"></path><path d="M19 17V5a2 2 0 0 0-2-2H4"></path><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"></path></svg>Audit log</a>
+      </nav>
+      <main style="flex: 1; min-width: 0; overflow-y: auto; padding: 22px 28px 32px; display: flex; flex-direction: column; gap: 10px; box-sizing: border-box;">
+        <h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1d2026;">Settings</h1>
+        <p style="margin: 0 0 4px; font-size: 13px; color: #505756;">Everything an admin sets up for HpTech Support. Agents see only the pages they can use.</p>
+        <h2 class="gh">TEAM</h2>
+        <div class="grid">
+          <a class="tile" href="#members"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path></svg></span><div><b>Members</b><span>Invite people, change roles and deactivate. 5 members, 1 invitation open.</span></div></a>
+          <a class="tile" href="#teams"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0"></path><circle cx="10" cy="8" r="5"></circle><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"></path></svg></span><div><b>Teams</b><span>Group people and choose team leads. 3 teams.</span></div></a>
+        </div>
+        <h2 class="gh">TICKETS</h2>
+        <div class="grid">
+          <a class="tile" href="Fields.dc.html"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5H3"></path><path d="M11 12H3"></path><path d="M16 19H3"></path><path d="M18 9v6"></path><path d="M21 12h-6"></path></svg></span><div><b>Fields</b><span>Your own fields on tickets, contacts and companies.</span></div></a>
+          <a class="tile" href="#canned"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"></path><path d="M7 11h10"></path><path d="M7 7h8"></path></svg></span><div><b>Canned responses</b><span>Saved replies with placeholders, personal or shared.</span></div></a>
+        </div>
+        <h2 class="gh">AUTOMATION</h2>
+        <div class="grid">
+          <a class="tile" href="Rules.dc.html"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"></rect><path d="M7 11v4a2 2 0 0 0 2 2h4"></path><rect width="8" height="8" x="13" y="13" rx="2"></rect></svg></span><div><b>Rules</b><span>Route, assign and follow up on tickets automatically. 4 of 5 on.</span></div></a>
+          <a class="tile" href="Slas.dc.html"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="15" y1="14" y2="11"></line><circle cx="12" cy="14" r="8"></circle></svg></span><div><b>SLAs</b><span>Reply and resolve targets per priority, warnings and escalation.</span></div></a>
+          <a class="tile" href="#hours"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 14v2.2l1.6 1"></path><path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338"></path><path d="M3 9h5.859"></path><circle cx="16" cy="16" r="6"></circle></svg></span><div><b>Business hours</b><span>Working days, time zone and holidays. Mon–Fri 09:00–18:00, Sat 10:00–14:00.</span></div></a>
+        </div>
+        <h2 class="gh">CHANNELS</h2>
+        <div class="grid">
+          <a class="tile" href="Email.dc.html"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg></span><div><b>Email</b><span>Your support address, sender name and customer emails.</span></div></a>
+          <a class="tile" href="WebForm.dc.html"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l6 6v12a2 2 0 0 1-2 2z"></path><path d="M14 2v6h6"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg></span><div><b>Web form</b><span>A public "Contact support" page. On.</span></div></a>
+        </div>
+        <h2 class="gh">WORKSPACE</h2>
+        <div class="grid">
+          <a class="tile" href="#security"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span><div><b>Security</b><span>Require two-step login for everyone.</span></div></a>
+          <a class="tile" href="#audit"><span class="box"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 12h-5"></path><path d="M15 8h-5"></path><path d="M19 17V5a2 2 0 0 0-2-2H4"></path><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"></path></svg></span><div><b>Audit log</b><span>Who changed what and when; filter and export.</span></div></a>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

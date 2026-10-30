@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sign in</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+a { color: #0a6f63; }
+.lbl { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #1d2026; }
+.inp { height: 42px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; font-size: 15px; box-sizing: border-box; }
+.pt { display: flex; gap: 10px; font-size: 14px; line-height: 1.5; color: #d8f0ed; }
+.pt b { color: #fff; }
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh; background: #fff; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <section style="flex: 1 1 480px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px 24px; box-sizing: border-box;">
+    <div style="width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 18px;">
+      <img src="/_blob/a0c201e08955ad1c872f7ee2ba174fbd" alt="Helpdesk" style="height: 34px; width: auto; align-self: flex-start;">
+      <div><h1 style="margin: 0; font-size: 26px; font-weight: 700; color: #1d2026;">Sign in to HpTech Support</h1><p style="margin: 6px 0 0; font-size: 14px; color: #676d7b;">hptech.dev.helpdesk.example.com · <a href="#find">Not your workspace?</a></p></div>
+      <label class="lbl">Email<input class="inp" type="email" autocomplete="email"></label>
+      <label class="lbl"><span style="display: flex; justify-content: space-between;">Password<a href="#forgot" style="font-weight: 500;">Forgot password?</a></span><input class="inp" type="password" autocomplete="current-password"></label>
+      <button style="height: 44px; border: 0; border-radius: 8px; background: #0c8577; color: #fff; font: inherit; font-size: 15px; font-weight: 600;">Sign in</button>
+      <p style="margin: 0; font-size: 13px; color: #676d7b; text-align: center;">New to Helpdesk? <a href="#signup">Create a workspace</a> · free 14-day trial, no card</p>
+      <p style="margin: 12px 0 0; font-size: 12px; color: #868e96; text-align: center;"><a href="#terms" style="color: #868e96;">Terms</a> · <a href="#privacy" style="color: #868e96;">Privacy</a></p>
+    </div>
+  </section>
+  <aside style="flex: 1 1 480px; display: flex; flex-direction: column; justify-content: center; gap: 22px; padding: 56px; background: #053c36; box-sizing: border-box;">
+    <h2 style="margin: 0; font-size: 28px; line-height: 1.25; font-weight: 700; color: #fff; max-width: 460px;">Every customer email and web form request, answered on time.</h2>
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 460px;">
+      <div class="pt"><span style="color: #added9;">✓</span><span><b>One inbox for your team.</b> Email and web form requests become tickets with a number.</span></div>
+      <div class="pt"><span style="color: #added9;">✓</span><span><b>Never miss a deadline.</b> SLA timers, warnings and escalation in your business hours.</span></div>
+      <div class="pt"><span style="color: #added9;">✓</span><span><b>Work faster.</b> Rules route tickets; canned replies and live updates save time.</span></div>
+    </div>
+    <div style="max-width: 520px; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,0.35); background: #f5f6f8;">
+      <div style="height: 22px; background: #fff; border-bottom: 1px solid #e5e7eb;"></div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px;">
+        <span style="display: flex; gap: 8px; align-items: center; height: 26px; padding: 0 10px; border-radius: 6px; background: #fff; font-size: 11px;"><b style="flex: 1;">Manager approvals stuck in pending</b><span style="padding: 1px 7px; border-radius: 999px; background: #fdecec; color: #c42b2b;">Overdue 27m</span></span>
+        <span style="display: flex; gap: 8px; align-items: center; height: 26px; padding: 0 10px; border-radius: 6px; background: #fff; font-size: 11px;"><b style="flex: 1;">Payslips for 3 employees are blank</b><span style="padding: 1px 7px; border-radius: 999px; background: #fff4e0; color: #a35a00;">Due in 25m</span></span>
+        <span style="display: flex; gap: 8px; align-items: center; height: 26px; padding: 0 10px; border-radius: 6px; background: #fff; font-size: 11px;"><b style="flex: 1;">Biometric sync stopped since yesterday</b><span style="padding: 1px 7px; border-radius: 999px; background: #e8f7ee; color: #1a7f45;">Reply in 17h</span></span>
+      </div>
+    </div>
+  </aside>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

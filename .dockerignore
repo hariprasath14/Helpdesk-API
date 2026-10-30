@@ -1,0 +1,13 @@
+# Only package files, TypeScript settings and src/ go into the image (see Dockerfile).
+node_modules
+dist
+coverage
+storage
+.env
+.env.*
+.git
+.husky
+deploy
+docs
+docker
+*.log

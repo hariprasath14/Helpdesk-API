@@ -1,0 +1,144 @@
+# TEMPORARY dev setup (no AWS budget yet): the whole dev environment on one Lightsail server.
+# The planned dev environment (ECS Fargate, Aurora, CloudFront, SES) is unchanged in
+# docs/ARCHITECTURE.md; this file goes away when it is built. See README "Temporary dev server".
+#
+# Settings come from .env next to this file on the server (template: env.example).
+# The API image (helpdesk-api:<version>) is built on the server by deploy.sh.
+name: helpdesk-dev
+
+x-api-environment: &api-environment
+  APP_VERSION: ${APP_VERSION:?}
+  LOG_LEVEL: info
+  LOG_FORMAT: json
+  # Caddy is the only way in, so the forwarded client address and host can be trusted.
+  TRUST_PROXY: 'true'
+  CORS_ORIGINS: ${APP_PUBLIC_URL:?}
+  API_DOCS_ENABLED: 'true'
+  DATABASE_URL: postgres://helpdesk_app:${APP_DB_PASSWORD:?}@postgres:5432/helpdesk
+  DATABASE_READ_URL: postgres://helpdesk_readonly:${READONLY_DB_PASSWORD:?}@postgres:5432/helpdesk
+  DATABASE_MIGRATION_URL: postgres://helpdesk_migrator:${MIGRATOR_DB_PASSWORD:?}@postgres:5432/helpdesk
+  # The database is on the same private Docker network, not on the internet.
+  DATABASE_SSL: 'false'
+  APP_PUBLIC_URL: ${APP_PUBLIC_URL:?}
+  COOKIE_SECURE: ${COOKIE_SECURE:-true}
+  TWO_FACTOR_ENCRYPTION_KEY: ${TWO_FACTOR_ENCRYPTION_KEY:?}
+  PASSWORD_BREACH_CHECK: 'true'
+  EMAIL_DRIVER: ${EMAIL_DRIVER:-smtp}
+  EMAIL_FROM: ${EMAIL_FROM:?}
+  EMAIL_ALLOWED_RECIPIENTS: ${EMAIL_ALLOWED_RECIPIENTS:-}
+  SES_REGION: ${SES_REGION:-ap-south-1}
+  SES_CONFIGURATION_SET: ${SES_CONFIGURATION_SET:-}
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+  TICKET_EMAIL_DOMAIN: ${TICKET_EMAIL_DOMAIN:?}
+  # Email to workspace addresses: test email from the test mailbox, and real email from the S3
+  # bucket SES receiving writes to once that exists (INBOUND_EMAIL_DRIVER=mailpit,s3 in .env).
+  INBOUND_EMAIL_DRIVER: ${INBOUND_EMAIL_DRIVER:-mailpit}
+  INBOUND_EMAIL_BUCKET: ${INBOUND_EMAIL_BUCKET:-}
+  INBOUND_EMAIL_REGION: ${SES_REGION:-ap-south-1}
+  MAILPIT_API_URL: http://mailpit:8025
+  SMTP_HOST: mailpit
+  SMTP_PORT: '1025'
+  SMTP_SECURE: 'false'
+  STORAGE_DRIVER: local
+  STORAGE_LOCAL_DIR: /app/storage
+  ATTACHMENT_MAX_MB: '20'
+
+services:
+  postgres:
+    image: postgres:16.15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      MIGRATOR_DB_PASSWORD: ${MIGRATOR_DB_PASSWORD:?}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?}
+      READONLY_DB_PASSWORD: ${READONLY_DB_PASSWORD:?}
+    command: ['postgres', '-c', 'shared_preload_libraries=pg_stat_statements']
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d helpdesk']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # One-off: docker compose run --rm migrate (deploy.sh runs it before restarting the API).
+  migrate:
+    image: helpdesk-api:${APP_VERSION:?}
+    profiles: ['tools']
+    command: ['node', 'dist/db/migrate.js', 'up']
+    environment: *api-environment
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api:
+    image: helpdesk-api:${APP_VERSION:?}
+    restart: unless-stopped
+    environment: *api-environment
+    volumes:
+      - files:/app/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:4000/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  worker:
+    image: helpdesk-api:${APP_VERSION:?}
+    restart: unless-stopped
+    command: ['node', 'dist/worker.js']
+    environment: *api-environment
+    volumes:
+      - files:/app/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # The test mailbox: every email the dev site sends lands here (EMAIL_DRIVER=smtp), except
+  # addresses on EMAIL_ALLOWED_RECIPIENTS when EMAIL_DRIVER=ses.
+  mailpit:
+    image: axllent/mailpit:v1.32.0
+    restart: unless-stopped
+    environment:
+      MP_MAX_MESSAGES: '5000'
+
+  caddy:
+    image: caddy:2.10.2-alpine
+    restart: unless-stopped
+    ports:
+      - '${HTTP_PORT:-80}:${HTTP_PORT:-80}'
+      - '${HTTPS_PORT:-443}:443'
+    environment:
+      HELPDESK_DOMAIN: ${HELPDESK_DOMAIN:?}
+      HTTP_PORT: ${HTTP_PORT:-80}
+      SITE_USER: ${SITE_USER:?}
+      SITE_PASSWORD_HASH: ${SITE_PASSWORD_HASH:?}
+    volumes:
+      - ./${CADDYFILE:-Caddyfile}:/etc/caddy/Caddyfile:ro
+      - ./site.caddy:/etc/caddy/site.caddy:ro
+      - ${WEB_ROOT:-/srv/helpdesk/web}:/srv/web:ro
+      # The one HTTPS certificate, from certificate.sh (the rehearsal needs none).
+      - ./certificates:/certs:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - api
+      - mailpit
+
+volumes:
+  postgres-data:
+  files:
+  caddy-data:
+  caddy-config:

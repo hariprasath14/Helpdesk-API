@@ -1,0 +1,30 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+
+# Local settings and secrets (see .env.example)
+.env
+.env.*
+!.env.example
+
+# Local file storage (STORAGE_DRIVER=local)
+/storage/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Temporary dev server rehearsal (deploy/dev-lightsail/rehearse.sh)
+.rehearsal-web/
+deploy/dev-lightsail/certificates/
+
+# Real names of the company and the dev server: kept on the owner's computer only (docs/BRANDING.md)
+*.local.env
+*.local.md
+
+# Design images made before the rename: they show the old name, so they stay on this computer only
+docs/design/figma/*.png
+docs/design/ux-canvas/png/
+docs/design/ux-audit-*.pdf

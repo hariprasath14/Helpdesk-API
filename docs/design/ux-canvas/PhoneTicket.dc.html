@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Phone ticket</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+a { color: #0a6f63; } a:hover { color: #053c36; }
+.ic { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pill { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.dot { width: 7px; height: 7px; border-radius: 999px; flex: none; }
+.av { width: 24px; height: 24px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.msg { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border: 1px solid #e5e7eb; border-radius: 12px; background: #fff; }
+.head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; }
+.muted { color: #676d7b; font-size: 12px; }
+.body { font-size: 15px; line-height: 1.5; white-space: pre-line; }
+.tab { flex: 1; height: 44px; border: 0; border-bottom: 2px solid transparent; background: none; font: inherit; font-size: 15px; font-weight: 500; color: #505756; }
+.tab.on { border-bottom-color: #0c8577; color: #0a6f63; }
+.prop { display: flex; align-items: center; justify-content: space-between; min-height: 52px; border-bottom: 1px solid #e5e7eb; font-size: 15px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 44px; padding: 0 14px; border: 1px solid #d1d5db; border-radius: 10px; background: #fff; color: #212529; font: inherit; font-size: 15px; font-weight: 500; }
+.btn.primary { border-color: #0c8577; background: #0c8577; color: #fff; }
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; display: flex; flex-direction: column; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <header style="display: flex; flex-direction: column; gap: 8px; padding: 10px 12px 0; background: #fff; border-bottom: 1px solid #e5e7eb; flex: none;">
+    <div style="display: flex; align-items: center; gap: 4px;">
+      <a href="PhoneList.dc.html" aria-label="Back to tickets" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: #505756;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></a>
+      <span style="font-size: 13px; color: #676d7b;">#1 · Rahul Verma</span>
+      <div style="flex-grow: 1;"></div>
+      <span title="Neha Iyer is replying" style="display: flex;"><span class="av" style="border: 2px solid #fff;">NI</span></span>
+      <button aria-label="More actions" style="width: 44px; height: 44px; border: 0; background: none; color: #505756;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
+    </div>
+    <h1 style="margin: 0 4px; font-size: 18px; line-height: 1.35; font-weight: 700; color: #1d2026;">Employees cannot mark attendance from the mobile app</h1>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 4px;">
+      <span class="pill" style="background: #e7f1ff; color: #1d5fd1;"><span class="dot" style="background: #2f7cf6;"></span>Open</span>
+      <span style="display: inline-flex; align-items: center; gap: 5px; font-size: 13px;"><span class="dot" style="background: #e03131;"></span>Urgent</span>
+      <span class="pill" style="background: #e8f7ee; color: #1a7f45;">Resolve in 13h 50m</span>
+    </div>
+    <div style="display: flex; margin: 0 -12px;">
+      <button class="{{tabConv}}" onClick="{{showConv}}">Conversation</button>
+      <button class="{{tabDetails}}" onClick="{{showDetails}}">Details</button>
+    </div>
+  </header>
+
+  <sc-if value="{{conv}}" hint-placeholder-val="{{true}}">
+    <div style="flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 12px 12px 96px;">
+      <article class="msg" style="background: #f5f6f8;"><div class="head"><span class="av">RV</span><b>Rahul Verma</b><span class="muted">by email · 10:02</span></div><div class="body">Employees at the Andheri office cannot mark attendance from the app since this morning.</div></article>
+      <div class="muted" style="padding-left: 6px;">Neha Iyer set priority to Urgent · 10:05</div>
+      <article class="msg" style="background: #fff4e0; border-color: #f5c26b;"><div class="head"><span class="av">PN</span><b>Priya Nair</b><span class="muted">private note · 10:12</span></div><div class="body"><b style="color: #0a6f63;">@Sanjay</b> did this start after the 4.2 release?</div></article>
+      <article class="msg" style="border-color: #0c8577;"><div class="head"><span class="av">PN</span><b>Priya Nair</b><span class="muted">replied · 10:20</span><span class="pill" style="background: #e8f7ee; color: #1a7f45; margin-left: auto;">Sent</span></div><div class="body">Hi Rahul, we can see check-ins failing on some Android phones. We are on it and will update you within the hour.</div></article>
+    </div>
+  </sc-if>
+  <sc-if value="{{details}}" hint-placeholder-val="{{false}}">
+    <div style="flex-grow: 1; overflow-y: auto; padding: 4px 16px 96px; background: #fff;">
+      <div class="prop"><span style="color: #676d7b;">Requester</span><a href="Contact.dc.html">Rahul Verma ›</a></div>
+      <div class="prop"><span style="color: #676d7b;">Status</span><span>Open ›</span></div>
+      <div class="prop"><span style="color: #676d7b;">Priority</span><span>Urgent ›</span></div>
+      <div class="prop"><span style="color: #676d7b;">Type</span><span>Incident ›</span></div>
+      <div class="prop"><span style="color: #676d7b;">Team</span><span>Attendance ›</span></div>
+      <div class="prop"><span style="color: #676d7b;">Assignee</span><span>Priya Nair ›</span></div>
+      <div class="prop"><span style="color: #676d7b;">Tags</span><span>mobile, android ›</span></div>
+      <div class="prop"><span style="color: #676d7b;">Module</span><span>Attendance ›</span></div>
+      <div class="prop" style="border-bottom: 0;"><span style="color: #676d7b;">Employee ID</span><span style="color: #676d7b;">Add ›</span></div>
+    </div>
+  </sc-if>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 8px; padding: 10px 12px 14px; background: #fff; border-top: 1px solid #e5e7eb; box-shadow: 0 -4px 12px rgba(16,24,40,0.06);">
+    <button class="btn primary" style="flex: 2;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 18v-2a4 4 0 0 0-4-4H4"></path><path d="m9 17-5-5 5-5"></path></svg>Reply</button>
+    <button class="btn" style="flex: 1;">Note</button>
+    <button class="btn" aria-label="Forward" style="width: 48px; padding: 0;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 17 5-5-5-5"></path><path d="M4 18v-2a4 4 0 0 1 4-4h12"></path></svg></button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: 'conv' }; }
+  renderVals() {
+    const t = this.state.tab;
+    return {
+      conv: t === 'conv', details: t === 'details',
+      tabConv: t === 'conv' ? 'tab on' : 'tab', tabDetails: t === 'details' ? 'tab on' : 'tab',
+      showConv: () => this.setState({ tab: 'conv' }),
+      showDetails: () => this.setState({ tab: 'details' }),
+    };
+  }
+}
+</script>
+</body>
+</html>

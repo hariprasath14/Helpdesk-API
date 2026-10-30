@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ticket list</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+a { color: #0a6f63; } a:hover { color: #053c36; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+*::-webkit-scrollbar-thumb:hover { background: #9aa1ab; }
+.ic { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nav { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px; border-radius: 8px; color: #afc2d6; font-size: 14px; font-weight: 500; text-decoration: none; }
+.nav:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.nav.on { background: rgba(255,255,255,0.14); color: #fff; box-shadow: inset 3px 0 0 #added9; }
+.chip { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #212529; font: inherit; font-size: 13px; cursor: pointer; }
+.chip.on { background: #ecf7f6; border-color: #added9; color: #0a6f63; font-weight: 500; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.dot { width: 7px; height: 7px; border-radius: 999px; flex: none; }
+.row { display: grid; grid-template-columns: 52px minmax(0, 1fr) 150px 92px 140px 140px 80px; align-items: center; column-gap: 12px; height: 44px; padding: 0 16px; border-bottom: 1px solid #e5e7eb; font-size: 13px; color: #212529; text-decoration: none; }
+.row:hover { background: #f5f6f8; }
+.cell-sub { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.menu-item { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 8px 12px; border: 0; border-radius: 6px; background: none; font: inherit; font-size: 13px; color: #212529; text-align: left; cursor: pointer; }
+.menu-item:hover { background: #f5f6f8; }
+.menu-item.on { background: #ecf7f6; color: #0a6f63; font-weight: 500; }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <aside style="flex: 0 0 232px; display: flex; flex-direction: column; gap: 4px; padding: 16px 12px; background: #053c36; box-sizing: border-box; overflow-y: auto;">
+    <img src="/_blob/8bf4d583b302740e0d6706384007c2fa" alt="Helpdesk" style="height: 32px; width: auto; align-self: flex-start; margin: 4px 4px 20px;">
+    <a class="nav" href="Home.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Home</a>
+    <a class="nav on" href="Main.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>Tickets</a>
+    <a class="nav" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Contacts</a>
+    <a class="nav" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 12h4"></path><path d="M10 8h4"></path><path d="M14 21v-3a2 2 0 0 0-4 0v3"></path><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path></svg>Companies</a>
+    <div style="flex-grow: 1;"></div>
+    <a class="nav" href="#settings"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path><circle cx="12" cy="12" r="3"></circle></svg>Settings</a>
+    <a class="nav" href="#collapse"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>Collapse</a>
+  </aside>
+  <div style="flex: 999 1 560px; min-width: 0; min-height: 0; overflow: hidden; display: flex; flex-direction: column;">
+    <header style="position: sticky; top: 0; z-index: 6; flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;">
+      <label style="display: flex; align-items: center; gap: 8px; width: 420px; max-width: 100%; height: 36px; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg><input aria-label="Search tickets" placeholder="Search tickets" style="border: 0; background: none; font: inherit; color: #212529; outline: none; flex-grow: 1;"></label>
+      <div style="flex-grow: 1;"></div>
+      <button style="display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border: 0; border-radius: 8px; background: #0c8577; color: #fff; font: inherit; font-size: 14px; font-weight: 500;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>New<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+      <a href="Home.dc.html" aria-label="Notifications, 3 unread" style="position: relative; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; color: #505756;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px;"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg><span style="position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; border-radius: 999px; background: #e03131; color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center;">3</span></a>
+      <div style="display: flex; align-items: center; gap: 10px;"><div style="text-align: right; line-height: 1.2;"><div style="font-size: 13px; font-weight: 600; color: #1d2026;">Hari Prasath</div><div style="font-size: 11px; color: #676d7b;">Admin · HpTech Support</div></div><div style="width: 32px; height: 32px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">HP</div></div>
+    </header>
+
+    <main style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 14px; padding: 20px 24px 24px; box-sizing: border-box;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+        <div style="position: relative;">
+          <button onClick="{{toggleViews}}" aria-expanded="{{viewsOpen}}" style="display: inline-flex; align-items: center; gap: 6px; padding: 2px 6px 2px 0; border: 0; background: none; font: inherit; font-size: 22px; font-weight: 700; color: #1d2026; cursor: pointer;">{{viewName}}<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px; color: #505756;"><path d="m6 9 6 6 6-6"></path></svg></button>
+          <sc-if value="{{viewsOpen}}" hint-placeholder-val="{{false}}">
+            <div style="position: absolute; top: 40px; left: 0; z-index: 5; width: 260px; padding: 8px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 12px 32px rgba(16,24,40,0.14);">
+              <div style="padding: 6px 12px 4px; font-size: 11px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em;">VIEWS</div>
+              <sc-for list="{{views}}" as="v" hint-placeholder-count="6">
+                <button class="{{v.cls}}" onClick="{{v.pick}}">{{v.name}}</button>
+              </sc-for>
+              <div style="padding: 10px 12px 4px; font-size: 11px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em;">SHARED VIEWS</div>
+              <button class="menu-item">Urgent and high</button>
+            </div>
+          </sc-if>
+        </div>
+        <span style="font-size: 13px; color: #676d7b;">24 tickets</span>
+        <div style="flex-grow: 1;"></div>
+        <a href="NewTicket.dc.html" style="display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 8px; background: #0c8577; color: #fff; font-size: 14px; font-weight: 500; text-decoration: none;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>New ticket</a>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+        <label style="display: flex; align-items: center; gap: 8px; width: 300px; height: 32px; padding: 0 10px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #676d7b; font-size: 13px; box-sizing: border-box;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg><input aria-label="Search in this view" placeholder="Number, subject, requester or any word" style="border: 0; background: none; font: inherit; outline: none; flex-grow: 1; min-width: 0;"></label>
+        <button class="chip on">Status: 3<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <button class="chip">Priority<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <button class="chip">Type<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <button class="chip">Team<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <button class="chip">Assignee<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <button class="chip">Tags<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <button class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2"></path><path d="M5 3 2 6"></path><path d="m22 6-3-3"></path></svg>Overdue</button>
+        <button class="chip" style="border: 0; background: none; color: #505756;">Clear filters</button>
+        <div style="flex-grow: 1;"></div>
+        <button class="chip">Order: Last updated<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+      </div>
+
+      <div style="display: flex; justify-content: center; margin: -4px 0;">
+        <button style="display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border: 0; border-radius: 999px; background: #0c8577; color: #fff; font: inherit; font-size: 12px; font-weight: 500; box-shadow: 0 4px 12px rgba(16,24,40,0.12);">1 new ticket · Show</button>
+      </div>
+
+      <div style="flex: 1; min-height: 0; overflow: auto; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+        <div style="min-width: 900px;">
+          <div class="row" style="position: sticky; top: 0; z-index: 2; height: 34px; background: #f5f6f8; font-size: 11px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em;">
+            <span>#</span><span>SUBJECT · REQUESTER</span><span>STATUS</span><span>PRIORITY</span><span>DUE</span><span>ASSIGNEE</span><span>UPDATED</span>
+          </div>
+          <sc-for list="{{tickets}}" as="t" hint-placeholder-count="14">
+            <a class="row" href="TicketPage.dc.html">
+              <span style="color: #676d7b; font-weight: 500;">{{t.num}}</span>
+              <span class="cell-sub"><span style="font-weight: 600; color: #1d2026;">{{t.subject}}</span><span style="color: #676d7b;">  ·  {{t.who}}</span></span>
+              <span><span class="pill" style="{{t.statusStyle}}"><span class="dot" style="{{t.statusDot}}"></span>{{t.status}}</span></span>
+              <span style="display: inline-flex; align-items: center; gap: 6px;"><span class="dot" style="{{t.prioDot}}"></span>{{t.prio}}</span>
+              <span><span class="pill" style="{{t.slaStyle}}">{{t.sla}}</span></span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; min-width: 0;"><span style="{{t.avStyle}}">{{t.ini}}</span><span class="cell-sub">{{t.assignee}}</span></span>
+              <span style="color: #676d7b; font-size: 12px;">{{t.upd}}</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { viewsOpen: false, view: 'All unresolved' }; }
+  renderVals() {
+    const S = {
+      'Open': ['background:#e7f1ff;color:#1d5fd1', 'background:#2f7cf6'],
+      'Pending': ['background:#fff4e0;color:#a35a00', 'background:#f08c00'],
+      'Waiting on customer': ['background:#f1edfd;color:#5b3fc4', 'background:#7c5ce4'],
+      'Resolved': ['background:#e8f7ee;color:#1a7f45', 'background:#22a55b'],
+    };
+    const P = { Low: '#868e96', Medium: '#2f7cf6', High: '#f08c00', Urgent: '#e03131' };
+    const SLA = { ok: 'background:#e8f7ee;color:#1a7f45', soon: 'background:#fff4e0;color:#a35a00', over: 'background:#fdecec;color:#c42b2b', paused: 'background:#f1f3f5;color:#495057' };
+    const rows = [
+      ['#28', 'Manager approvals stuck in pending', 'Sneha Kapoor · Globex India', 'Open', 'High', 'over', 'Overdue 27m', 'HP', 'Hari Prasath', '2m ago'],
+      ['#12', 'Payment failed but amount debited', 'Ananya Das · Initech Pvt Ltd', 'Open', 'Urgent', 'over', 'Overdue 25m', 'PN', 'Priya Nair', '4m ago'],
+      ['#26', 'Payslips for 3 employees are blank', 'Kavya Reddy · Acme Corp', 'Open', 'Medium', 'soon', 'Due in 25m', '–', 'Unassigned', '8m ago'],
+      ['#6', 'Geofence check-in fails at the Pune warehouse', 'Mohammed Irfan · Umbrella Logistics', 'Open', 'Urgent', 'soon', 'Due in 40m', '–', 'Unassigned', '9m ago'],
+      ['#25', 'Biometric sync stopped since yesterday', 'Rahul Verma · Globex India', 'Open', 'Medium', 'ok', 'Reply in 17h 50m', 'PN', 'Priya Nair', '12m ago'],
+      ['#27', 'How do I add a new shift pattern?', 'Lakshmi Iyer · Umbrella Logistics', 'Pending', 'Low', 'ok', 'Reply in 1d 9h', 'SM', 'Sanjay Menon', '15m ago'],
+      ['#24', 'Unable to apply leave for next week', 'Fatima Sheikh', 'Open', 'Medium', 'ok', 'Reply in 17h 50m', '–', 'Unassigned', '18m ago'],
+      ['#23', 'Demo request for 50 employees', 'Meera Pillai', 'Open', 'Medium', 'ok', 'Reply in 17h 50m', 'SM', 'Sanjay Menon', '18m ago'],
+      ['#2', 'October payslips show wrong PF deduction', 'Arjun Mehta · Acme Corp', 'Open', 'High', 'ok', 'Resolve in 17h 50m', 'RK', 'Ravi Kumar', '19m ago'],
+      ['#1', 'Employees cannot mark attendance from the mobile app', 'Rahul Verma · Globex India', 'Open', 'Urgent', 'ok', 'Resolve in 13h 50m', 'PN', 'Priya Nair', '20m ago'],
+      ['#11', 'Overtime not calculated for night shift', 'Mohammed Irfan · Umbrella Logistics', 'Pending', 'High', 'ok', 'Reply in 1d 9h', 'NI', 'Neha Iyer', '21m ago'],
+      ['#4', 'Leave balance not carried forward to 2027', 'Sneha Kapoor · Globex India', 'Waiting on customer', 'Medium', 'paused', 'Paused · waiting', 'HP', 'Hari Prasath', '22m ago'],
+      ['#18', 'Upgrade to Premium plan for 400 employees', 'Arjun Mehta · Acme Corp', 'Pending', 'Medium', 'ok', 'Resolve in 2d 6h', 'HP', 'Hari Prasath', '23m ago'],
+      ['#15', 'App crashes on Android 14 when uploading selfie', 'Rahul Verma · Globex India', 'Open', 'High', 'ok', 'Reply in 3h 40m', 'SM', 'Sanjay Menon', '24m ago'],
+    ];
+    const av = 'width:22px;height:22px;border-radius:999px;background:#d8f0ed;color:#0a6f63;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:none';
+    const avNone = 'width:22px;height:22px;border-radius:999px;border:1px dashed #d1d5db;color:#676d7b;font-size:9px;display:inline-flex;align-items:center;justify-content:center;flex:none;box-sizing:border-box';
+    const tickets = rows.map(([num, subject, who, status, prio, slaKind, sla, ini, assignee, upd]) => ({
+      num, subject, who, status, prio, sla, ini: ini === '–' ? '' : ini, assignee, upd,
+      statusStyle: S[status][0], statusDot: S[status][1], prioDot: 'background:' + P[prio], slaStyle: SLA[slaKind],
+      avStyle: ini === '–' ? avNone : av,
+    }));
+    const names = ['All unresolved', 'My unresolved', 'Unassigned', 'All tickets', 'Resolved and closed', 'Trash'];
+    const views = names.map((name) => ({
+      name,
+      cls: name === this.state.view ? 'menu-item on' : 'menu-item',
+      pick: () => this.setState({ view: name, viewsOpen: false }),
+    }));
+    return {
+      tickets, views, viewName: this.state.view, viewsOpen: this.state.viewsOpen,
+      toggleViews: () => this.setState({ viewsOpen: !this.state.viewsOpen }),
+    };
+  }
+}
+</script>
+</body>
+</html>

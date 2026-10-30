@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings menu</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+</style>
+</helmet>
+<nav aria-label="Settings" style="width: 220px; height: 100%; overflow-y: auto; padding: 12px 10px; background: #fff; border-right: 1px solid #e5e7eb; box-sizing: border-box; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <sc-for list="{{items}}" as="i" hint-placeholder-count="16">
+    <sc-if value="{{i.isGroup}}" hint-placeholder-val="{{false}}"><div style="padding: 14px 10px 4px; font-size: 11px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em;">{{i.label}}</div></sc-if>
+    <sc-if value="{{i.isLink}}" hint-placeholder-val="{{true}}"><a href="{{i.href}}" style="{{i.style}}"><svg viewBox="0 0 24 24" aria-hidden="true" style="{{i.iconStyle}}"><path d="{{i.d}}"></path></svg>{{i.label}}</a></sc-if>
+  </sc-for>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"text","default":"Rules"},"$preview":{"width":220,"height":760}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const active = this.props.active ?? 'Rules';
+    const rows = [
+      ['All settings', 'SettingsOverview.dc.html', 'M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z'],
+      ['TEAM'],
+      ['Members', '#members', 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M13 7a4 4 0 1 1-8 0a4 4 0 1 1 8 0 M22 21v-2a4 4 0 0 0-3-3.87'],
+      ['Teams', '#teams', 'M18 21a8 8 0 0 0-16 0 M15 8a5 5 0 1 1-10 0a5 5 0 1 1 10 0 M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3'],
+      ['TICKETS'],
+      ['Fields', 'Fields.dc.html', 'M16 5H3 M11 12H3 M16 19H3 M18 9v6 M21 12h-6'],
+      ['Canned responses', '#canned', 'M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z M7 11h10 M7 7h8'],
+      ['AUTOMATION'],
+      ['Rules', 'Rules.dc.html', 'M5 3h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z M7 11v4a2 2 0 0 0 2 2h4 M15 13h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2z'],
+      ['SLAs', 'Slas.dc.html', 'M10 2h4 M12 14l3-3 M20 14a8 8 0 1 1-16 0a8 8 0 1 1 16 0'],
+      ['Business hours', '#hours', 'M16 14v2.2l1.6 1 M21 7.338V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h2.338 M3 9h5.859 M22 16a6 6 0 1 1-12 0a6 6 0 1 1 12 0'],
+      ['CHANNELS'],
+      ['Email', 'Email.dc.html', 'M22 7l-8.991 5.727a2 2 0 0 1-2.009 0L2 7 M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z'],
+      ['Web form', 'WebForm.dc.html', 'M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l6 6v12a2 2 0 0 1-2 2z M14 2v6h6 M16 13H8 M16 17H8'],
+      ['WORKSPACE'],
+      ['Security', '#security', 'M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z M9 12l2 2 4-4'],
+      ['Audit log', '#audit', 'M15 12h-5 M15 8h-5 M19 17V5a2 2 0 0 0-2-2H4 M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3'],
+    ];
+    const items = rows.map(([label, href, d]) => {
+      if (!href) return { isGroup: true, isLink: false, label };
+      const on = label === active;
+      return {
+        isGroup: false, isLink: true, label, href, d,
+        style: 'display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:6px;font-size:13px;text-decoration:none;' + (on ? 'background:#ecf7f6;color:#0a6f63;font-weight:600;' : 'color:#212529;'),
+        iconStyle: 'width:16px;height:16px;flex:none;fill:none;stroke:' + (on ? '#0a6f63' : '#676d7b') + ';stroke-width:2;stroke-linecap:round;stroke-linejoin:round;',
+      };
+    });
+    return { items };
+  }
+}
+</script>
+</body>
+</html>

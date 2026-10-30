@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Your account</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; } *::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+.tab { height: 40px; padding: 0 14px; border: 0; border-bottom: 2px solid transparent; background: none; font: inherit; font-size: 14px; font-weight: 500; color: #505756; cursor: pointer; }
+.tab.on { border-bottom-color: #0c8577; color: #0a6f63; }
+.theme { display: flex; flex-direction: column; gap: 10px; width: 280px; padding: 12px; border: 2px solid #e5e7eb; border-radius: 14px; background: #fff; font: inherit; text-align: left; cursor: pointer; }
+.theme.on { border-color: #0c8577; box-shadow: 0 0 0 3px #ecf7f6; }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <dc-import name="Sidebar" active="" hint-size="232px,100%"></dc-import>
+  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+    <header style="flex: none; display: flex; align-items: center; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;"><span style="width: 420px; height: 36px; display: flex; align-items: center; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;">Search tickets</span></header>
+    <main style="flex: 1; min-height: 0; overflow-y: auto; padding: 22px 28px 32px; box-sizing: border-box;">
+      <div style="max-width: 920px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 14px;"><span style="width: 52px; height: 52px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center;">HP</span><div><h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1d2026;">Your account</h1><span style="font-size: 13px; color: #676d7b;">Hari Prasath · hari@hptech.test · Admin, HpTech Support</span></div></div>
+        <div role="tablist" style="display: flex; border-bottom: 1px solid #e5e7eb;"><button class="tab" role="tab">Profile</button><button class="tab" role="tab">Security</button><button class="tab" role="tab">Notifications</button><button class="tab on" role="tab" aria-selected="true">Appearance</button></div>
+        <section style="display: flex; flex-direction: column; gap: 14px; padding: 20px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+          <div><h2 style="margin: 0; font-size: 16px; font-weight: 700;">Colour theme</h2><p style="margin: 4px 0 0; font-size: 13px; color: #505756;">Changes Helpdesk's colours for you only, on every device you sign in on. It applies at once; nothing else changes.</p></div>
+          <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+            <sc-for list="{{themes}}" as="t" hint-placeholder-count="2">
+              <button class="{{t.cls}}" onClick="{{t.pick}}" aria-pressed="{{t.on}}">
+                <span style="display: flex; height: 110px; border-radius: 10px; overflow: hidden; border: 1px solid #e5e7eb;">
+                  <span style="{{t.side}}"></span>
+                  <span style="flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 10px; background: #f5f6f8;">
+                    <span style="height: 8px; width: 60%; border-radius: 4px; background: #d1d5db;"></span>
+                    <span style="display: flex; gap: 6px;"><span style="{{t.btn}}"></span><span style="{{t.tint}}"></span></span>
+                    <span style="height: 6px; width: 80%; border-radius: 4px; background: #e5e7eb;"></span>
+                    <span style="height: 6px; width: 70%; border-radius: 4px; background: #e5e7eb;"></span>
+                  </span>
+                </span>
+                <span style="display: flex; align-items: center; gap: 8px;"><span style="{{t.radio}}"></span><b style="font-size: 14px;">{{t.name}}</b><span style="font-size: 12px; color: #676d7b;">{{t.hex}}</span></span>
+              </button>
+            </sc-for>
+          </div>
+          <span style="font-size: 12px; color: #676d7b;">{{status}}</span>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { theme: 'teal', changed: false }; }
+  renderVals() {
+    const defs = [
+      { id: 'teal', name: 'Help Teal', hex: '#0E9F8E · default', side: '#053c36', btn: '#0c8577', tint: '#ecf7f6' },
+      { id: 'cyan', name: 'Ocean Cyan', hex: '#0891B2', side: '#033744', btn: '#077b97', tint: '#ebf6f9' },
+    ];
+    const themes = defs.map((d) => {
+      const on = this.state.theme === d.id;
+      return {
+        name: d.name, hex: d.hex, on: on ? 'true' : 'false', cls: on ? 'theme on' : 'theme',
+        side: 'width: 54px; background:' + d.side,
+        btn: 'width: 48px; height: 16px; border-radius: 4px; background:' + d.btn,
+        tint: 'width: 48px; height: 16px; border-radius: 4px; background:' + d.tint,
+        radio: 'width: 16px; height: 16px; border-radius: 999px; box-sizing: border-box; border:' + (on ? '5px solid ' + d.btn : '2px solid #adb5bd'),
+        pick: () => this.setState({ theme: d.id, changed: true }),
+      };
+    });
+    return { themes, status: this.state.changed ? 'Theme changed. Saved for you.' : 'Help Teal is the workspace default.' };
+  }
+}
+</script>
+</body>
+</html>

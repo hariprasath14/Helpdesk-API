@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ticket page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+a { color: #0a6f63; } a:hover { color: #053c36; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+*::-webkit-scrollbar-thumb:hover { background: #9aa1ab; }
+.val.changed { border-color: #0c8577; background: #ecf7f6; }
+.ic { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nav { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px; border-radius: 8px; color: #afc2d6; font-size: 14px; font-weight: 500; text-decoration: none; }
+.nav:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.nav.on { background: rgba(255,255,255,0.14); color: #fff; box-shadow: inset 3px 0 0 #added9; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.dot { width: 7px; height: 7px; border-radius: 999px; flex: none; }
+.av { width: 26px; height: 26px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.msg { display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 14px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; }
+.head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
+.muted { color: #676d7b; font-size: 12px; }
+.body { font-size: 14px; line-height: 1.55; color: #212529; white-space: pre-line; }
+.prop { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 8px; min-height: 36px; font-size: 13px; }
+.val { display: flex; align-items: center; justify-content: space-between; gap: 6px; height: 30px; padding: 0 10px; border: 1px solid transparent; border-radius: 6px; background: #f5f6f8; color: #212529; font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+.val:hover { border-color: #d1d5db; background: #fff; }
+.tab { height: 34px; padding: 0 12px; border: 0; border-bottom: 2px solid transparent; background: none; font: inherit; font-size: 13px; font-weight: 500; color: #505756; cursor: pointer; }
+.tab.on { border-bottom-color: #0c8577; color: #0a6f63; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #212529; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn.primary { border-color: #0c8577; background: #0c8577; color: #fff; }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <aside style="flex: 0 0 232px; display: flex; flex-direction: column; gap: 4px; padding: 16px 12px; background: #053c36; box-sizing: border-box;">
+    <img src="/_blob/8bf4d583b302740e0d6706384007c2fa" alt="Helpdesk" style="height: 32px; width: auto; align-self: flex-start; margin: 4px 4px 20px;">
+    <a class="nav" href="Home.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Home</a>
+    <a class="nav on" href="Main.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>Tickets</a>
+    <a class="nav" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Contacts</a>
+    <a class="nav" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 12h4"></path><path d="M10 8h4"></path><path d="M14 21v-3a2 2 0 0 0-4 0v3"></path><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path></svg>Companies</a>
+    <div style="flex-grow: 1;"></div>
+    <a class="nav" href="#settings"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path><circle cx="12" cy="12" r="3"></circle></svg>Settings</a>
+    <a class="nav" href="#collapse"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>Collapse</a>
+  </aside>
+  <div style="flex: 999 1 560px; min-width: 0; min-height: 0; display: flex; flex-direction: column;">
+    <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;">
+      <label style="display: flex; align-items: center; gap: 8px; width: 420px; max-width: 100%; height: 36px; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg><input aria-label="Search tickets" placeholder="Search tickets" style="border: 0; background: none; font: inherit; color: #212529; outline: none; flex-grow: 1;"></label>
+      <div style="flex-grow: 1;"></div>
+      <button class="btn primary" style="height: 36px;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>New<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+      <a href="Home.dc.html" aria-label="Notifications, 3 unread" style="position: relative; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; color: #505756;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px;"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg><span style="position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; border-radius: 999px; background: #e03131; color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center;">3</span></a>
+      <div style="display: flex; align-items: center; gap: 10px;"><div style="text-align: right; line-height: 1.2;"><div style="font-size: 13px; font-weight: 600; color: #1d2026;">Hari Prasath</div><div style="font-size: 11px; color: #676d7b;">Admin · HpTech Support</div></div><div class="av" style="width: 32px; height: 32px; font-size: 12px;">HP</div></div>
+    </header>
+
+    <section style="display: flex; flex-direction: column; gap: 8px; padding: 14px 24px; background: #fff; border-bottom: 1px solid #e5e7eb;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+        <a href="Main.dc.html" aria-label="Back to tickets" style="display: inline-flex; color: #505756;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px;"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></a>
+        <span style="font-size: 13px; color: #676d7b; font-weight: 500;">#1</span>
+        <h1 style="margin: 0; font-size: 20px; font-weight: 700; color: #1d2026;">Employees cannot mark attendance from the mobile app</h1>
+        <button aria-label="Edit subject" style="border: 0; background: none; color: #676d7b; cursor: pointer;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg></button>
+        <div style="flex-grow: 1;"></div>
+        <div title="Neha Iyer is replying · Ravi Kumar is viewing" style="display: flex; align-items: center; gap: 8px;">
+          <div style="display: flex;"><span class="av" style="border: 2px solid #fff;">NI</span><span class="av" style="border: 2px solid #fff; margin-left: -8px;">RK</span></div>
+          <span style="font-size: 12px; color: #0a6f63; font-weight: 500;">Neha is typing a reply…</span>
+        </div>
+        <button class="btn" aria-label="More actions" style="width: 34px; padding: 0; justify-content: center;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-left: 30px;">
+        <span class="pill" style="background: #e7f1ff; color: #1d5fd1;"><span class="dot" style="background: #2f7cf6;"></span>Open</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500;"><span class="dot" style="background: #e03131;"></span>Urgent</span>
+        <span class="pill" style="background: #e8f7ee; color: #1a7f45;">Replied on time</span>
+        <span class="pill" style="background: #e8f7ee; color: #1a7f45;">Resolve in 13h 50m</span>
+        <span class="muted">· raised by Rahul Verma by email · 20 minutes ago · logged by Neha Iyer</span>
+      </div>
+    </section>
+
+    <div style="flex: 1; min-height: 0; display: flex; gap: 20px; padding: 16px 24px 0; align-items: stretch;">
+      <div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; padding: 0 6px 16px 0;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <h2 style="margin: 0; font-size: 15px; font-weight: 700; color: #1d2026;">Conversation</h2>
+          <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #505756;"><input type="checkbox" checked style="accent-color: #0c8577;">Show changes</label>
+        </div>
+        <article class="msg" style="background: #f5f6f8;">
+          <div class="head"><span class="av">RV</span><b>Rahul Verma</b><span class="muted">by email · 10:02</span></div>
+          <div class="body">Employees at the Andheri office cannot mark attendance from the app since this morning. About 120 people are affected.</div>
+        </article>
+        <div style="display: flex; align-items: center; gap: 8px; padding-left: 8px;" class="muted"><span class="dot" style="background: #adb5bd; width: 6px; height: 6px;"></span>Neha Iyer set priority to Urgent and team to Attendance · 10:05</div>
+        <article class="msg" style="background: #fff4e0; border-color: #f5c26b;">
+          <div class="head"><span class="av">PN</span><b>Priya Nair</b><span class="muted">private note · 10:12</span><div style="flex-grow: 1;"></div><span style="display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: #a35a00;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="width: 12px; height: 12px;"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Private</span></div>
+          <div class="body"><b style="color: #0a6f63;">@Sanjay</b> can you check if this started after the 4.2 app release? Three companies reported it this morning.</div>
+        </article>
+        <article class="msg" style="border-color: #0c8577;">
+          <div class="head"><span class="av">PN</span><b>Priya Nair</b><span class="muted">replied · 10:20 · to rahul.verma@globex.test</span><div style="flex-grow: 1;"></div><span class="pill" style="background: #e8f7ee; color: #1a7f45;">Sent</span></div>
+          <div class="body">Hi Rahul,
+
+Thanks for reporting this. We can see check-ins failing for some Android phones since this morning. Our team is on it and I will update you within the hour.
+
+Priya</div>
+        </article>
+        <article class="msg" style="background: #fff4e0; border-color: #f5c26b;">
+          <div class="head"><span class="av">SM</span><b>Sanjay Menon</b><span class="muted">private note · 10:31</span><div style="flex-grow: 1;"></div><span style="font-size: 11px; font-weight: 600; color: #a35a00;">Private</span></div>
+          <div class="body">Yes, only on 4.2. Rolling back the location library fixes it in staging.</div>
+        </article>
+
+        <div style="position: sticky; bottom: 12px; margin-top: 6px;">
+          <sc-if value="{{closed}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; background: #fff; border: 1px solid #d1d5db; border-radius: 12px; box-shadow: 0 4px 12px rgba(16,24,40,0.08);">
+              <button onClick="{{openReply}}" style="flex: 1 1 200px; height: 34px; border: 0; background: none; font: inherit; font-size: 13px; color: #676d7b; text-align: left; cursor: text;">Reply to Rahul Verma…</button>
+              <button class="btn primary" onClick="{{openReply}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 18v-2a4 4 0 0 0-4-4H4"></path><path d="m9 17-5-5 5-5"></path></svg>Reply</button>
+              <button class="btn" onClick="{{openNote}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z"></path><path d="M15 3v5a1 1 0 0 0 1 1h5"></path></svg>Note</button>
+              <button class="btn" onClick="{{openForward}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 17 5-5-5-5"></path><path d="M4 18v-2a4 4 0 0 1 4-4h12"></path></svg>Forward</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{open}}" hint-placeholder-val="{{false}}">
+            <div style="display: flex; flex-direction: column; background: #fff; border: 1px solid #d1d5db; border-radius: 12px; box-shadow: 0 4px 12px rgba(16,24,40,0.08);">
+              <div style="display: flex; align-items: center; gap: 4px; padding: 0 8px; border-bottom: 1px solid #e5e7eb;">
+                <button class="{{tabReply}}" onClick="{{openReply}}">Reply</button>
+                <button class="{{tabNote}}" onClick="{{openNote}}">Private note</button>
+                <button class="{{tabForward}}" onClick="{{openForward}}">Forward</button>
+                <div style="flex-grow: 1;"></div>
+                <button onClick="{{close}}" aria-label="Close" style="border: 0; background: none; color: #676d7b; cursor: pointer;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px;">
+                <div style="font-size: 13px; color: #505756;">{{toLine}} <button style="border: 0; background: none; font: inherit; font-size: 12px; color: #0a6f63; cursor: pointer;">Add Cc</button></div>
+                <textarea aria-label="Message" placeholder="{{placeholder}}" style="min-height: 110px; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; font-size: 14px; resize: vertical;"></textarea>
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+                  <button class="btn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"></path></svg>Attach</button>
+                  <button class="btn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"></path><path d="M7 11h10"></path><path d="M7 15h6"></path><path d="M7 7h8"></path></svg>Canned response</button>
+                  <div style="flex-grow: 1;"></div>
+                  <span class="muted">Then set status</span>
+                  <button class="btn">Keep Open<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+                  <button class="btn primary">{{sendLabel}}</button>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+
+      <aside style="flex: 1 1 300px; max-width: 340px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; padding: 0 4px 16px 0;">
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="av" style="width: 36px; height: 36px; font-size: 13px;">RV</span>
+            <div style="min-width: 0; flex-grow: 1;"><a href="Contact.dc.html" style="font-size: 14px; font-weight: 700; text-decoration: none;">Rahul Verma</a><div class="muted">IT Admin · <a href="Contact.dc.html">Globex India</a></div></div>
+            <button style="border: 0; background: none; font: inherit; font-size: 12px; color: #0a6f63; cursor: pointer;">Change</button>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #505756;"><span>rahul.verma@globex.test</span><span>+91 98520 95027</span></div>
+          <div style="border-top: 1px solid #e5e7eb; padding-top: 8px; display: flex; flex-direction: column; gap: 6px;">
+            <span class="muted" style="font-weight: 600;">Their other tickets</span>
+            <a href="TicketPage.dc.html" style="font-size: 13px; text-decoration: none; display: flex; justify-content: space-between; gap: 8px;"><span>#25 Biometric sync stopped</span><span class="pill" style="background: #e7f1ff; color: #1d5fd1;">Open</span></a>
+            <a href="TicketPage.dc.html" style="font-size: 13px; text-decoration: none; display: flex; justify-content: space-between; gap: 8px;"><span>#15 App crashes on Android 14</span><span class="pill" style="background: #e7f1ff; color: #1d5fd1;">Open</span></a>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; padding: 12px 16px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+          <h2 style="margin: 0 0 6px; font-size: 14px; font-weight: 700; color: #1d2026;">Properties</h2>
+          <div class="prop"><span class="muted">Status</span><button class="val">Open<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></div>
+          <div class="prop"><span class="muted">Priority</span><button class="{{prioCls}}" onClick="{{changePriority}}"><span style="display: inline-flex; align-items: center; gap: 6px;"><span class="dot" style="{{prioDot}}"></span>{{prio}}</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></div>
+          <div class="prop"><span class="muted">Type</span><button class="val">Incident<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></div>
+          <div class="prop"><span class="muted">Team</span><button class="val">Attendance<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></div>
+          <div class="prop"><span class="muted">Assignee</span><button class="val"><span style="display: inline-flex; align-items: center; gap: 6px;"><span class="av" style="width: 20px; height: 20px; font-size: 8px;">PN</span>Priya Nair</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></div>
+          <div class="prop"><span class="muted">Tags</span><button class="val">mobile, android</button></div>
+          <div style="margin: 8px 0 2px; padding-top: 8px; border-top: 1px solid #e5e7eb; font-size: 11px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em;">YOUR FIELDS</div>
+          <div class="prop"><span class="muted">Module</span><button class="val">Attendance<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></div>
+          <div class="prop"><span class="muted">Employee ID</span><button class="val" style="color: #676d7b;">Add</button></div>
+          <div style="position: sticky; bottom: -16px; display: flex; align-items: center; gap: 8px; margin: 10px -16px -12px; padding: 10px 16px; border-top: 1px solid {{barBorder}}; background: {{barBg}}; border-radius: 0 0 12px 12px;">
+            <span style="flex-grow: 1; font-size: 12px; font-weight: {{barWeight}}; color: {{barText}};">{{barLabel}}</span>
+            <sc-if value="{{dirty}}" hint-placeholder-val="{{false}}"><button class="btn" onClick="{{discard}}">Discard</button></sc-if>
+            <button class="btn primary" style="opacity: {{updOpacity}};" onClick="{{save}}">Update</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { mode: null, prio: 'Urgent', dirty: false, saved: false }; }
+  renderVals() {
+    const mode = this.state.mode;
+    const { prio, dirty, saved } = this.state;
+    const prioVals = {
+      prio, prioCls: dirty ? 'val changed' : 'val',
+      prioDot: 'background:' + (prio === 'Urgent' ? '#e03131' : '#f08c00'),
+      dirty,
+      barLabel: dirty ? '1 unsaved change: Priority' : (saved ? 'Saved' : 'Change a field, then Update'),
+      barBg: dirty ? '#ecf7f6' : '#ffffff', barBorder: dirty ? '#added9' : '#e5e7eb',
+      barText: dirty ? '#0a6f63' : '#676d7b', barWeight: dirty ? '600' : '400',
+      updOpacity: dirty ? '1' : '0.5',
+      changePriority: () => this.setState({ prio: prio === 'Urgent' ? 'High' : 'Urgent', dirty: true, saved: false }),
+      save: () => this.setState({ dirty: false, saved: true }),
+      discard: () => this.setState({ prio: 'Urgent', dirty: false, saved: false }),
+    };
+    const tab = (m) => (mode === m ? 'tab on' : 'tab');
+    const labels = {
+      reply: ['To Rahul Verma <rahul.verma@globex.test>', 'Write your reply', 'Send reply'],
+      note: ['Only your team sees private notes. Type @ to mention someone.', 'Write a private note', 'Add note'],
+      forward: ['To: email addresses', 'Add a message for the person you forward to', 'Forward'],
+    };
+    const l = labels[mode] || labels.reply;
+    return {
+      ...prioVals,
+      closed: mode === null, open: mode !== null,
+      tabReply: tab('reply'), tabNote: tab('note'), tabForward: tab('forward'),
+      toLine: l[0], placeholder: l[1], sendLabel: l[2],
+      openReply: () => this.setState({ mode: 'reply' }),
+      openNote: () => this.setState({ mode: 'note' }),
+      openForward: () => this.setState({ mode: 'forward' }),
+      close: () => this.setState({ mode: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>

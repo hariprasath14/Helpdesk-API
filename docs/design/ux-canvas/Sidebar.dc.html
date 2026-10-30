@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sidebar</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+</style>
+</helmet>
+<aside style="width: 232px; height: 100%; min-height: 600px; display: flex; flex-direction: column; gap: 4px; padding: 16px 12px; background: #053c36; box-sizing: border-box; font-family: Satoshi, system-ui, sans-serif; color: #afc2d6;">
+  <img src="/_blob/8bf4d583b302740e0d6706384007c2fa" alt="Helpdesk" style="height: 32px; width: auto; align-self: flex-start; margin: 4px 4px 20px;">
+  <sc-for list="{{top}}" as="n" hint-placeholder-count="4">
+    <a href="{{n.href}}" style="{{n.style}}"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"><path d="{{n.d}}"></path></svg>{{n.label}}</a>
+  </sc-for>
+  <div style="flex-grow: 1;"></div>
+  <sc-for list="{{bottom}}" as="n" hint-placeholder-count="1">
+    <a href="{{n.href}}" style="{{n.style}}"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"><path d="{{n.d}}"></path></svg>{{n.label}}</a>
+  </sc-for>
+</aside>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"enum","options":["Home","Tickets","Contacts","Companies","Settings"],"default":"Settings"},"$preview":{"width":232,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const active = this.props.active ?? 'Settings';
+    const base = 'display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;';
+    const item = (label, href, d) => ({ label, href, d, style: base + (label === active ? 'background:rgba(255,255,255,0.14);color:#fff;box-shadow:inset 3px 0 0 #added9;' : 'color:#afc2d6;') });
+    return {
+      top: [
+        item('Home', 'Home.dc.html', 'M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8 M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'),
+        item('Tickets', 'Main.dc.html', 'M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z M13 5v2 M13 17v2 M13 11v2'),
+        item('Contacts', 'Contact.dc.html', 'M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2 M16 7a4 4 0 1 1-8 0a4 4 0 1 1 8 0'),
+        item('Companies', 'Contact.dc.html', 'M10 12h4 M10 8h4 M14 21v-3a2 2 0 0 0-4 0v3 M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2 M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16'),
+      ],
+      bottom: [item('Settings', 'SettingsOverview.dc.html', 'M12 15a3 3 0 1 0 0-6a3 3 0 1 0 0 6z M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z')],
+    };
+  }
+}
+</script>
+</body>
+</html>

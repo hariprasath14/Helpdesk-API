@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Contact support</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+a { color: #0a6f63; }
+.lbl { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500; color: #1d2026; }
+.inp { padding: 0 12px; height: 44px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; font-size: 15px; box-sizing: border-box; }
+.hint { font-size: 12px; font-weight: 400; color: #676d7b; }
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529; display: flex; flex-direction: column; align-items: center;">
+  <header style="width: 100%; display: flex; justify-content: center; background: #fff; border-bottom: 1px solid #e5e7eb;">
+    <div style="width: 100%; max-width: 640px; display: flex; align-items: center; gap: 12px; padding: 16px 20px; box-sizing: border-box;">
+      <span title="Workspace logo (from Branding, F32)" style="width: 40px; height: 40px; border-radius: 10px; border: 1px dashed #adb5bd; color: #676d7b; font-size: 11px; display: flex; align-items: center; justify-content: center;">Logo</span>
+      <div><b style="font-size: 16px;">HpTech Support</b><div style="font-size: 12px; color: #676d7b;">We usually reply within a few hours</div></div>
+    </div>
+  </header>
+  <main style="width: 100%; max-width: 640px; padding: 28px 20px 40px; box-sizing: border-box;">
+    <sc-if value="{{form}}" hint-placeholder-val="{{true}}">
+      <section style="display: flex; flex-direction: column; gap: 16px; padding: 28px; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;">
+        <div><h1 style="margin: 0; font-size: 24px; font-weight: 700; color: #1d2026;">Contact HpTech Support</h1><p style="margin: 6px 0 0; font-size: 14px; color: #505756;">Tell us what went wrong and we will reply by email.</p></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+          <label class="lbl" style="flex: 1 1 220px;">Your name<input class="inp" autocomplete="name"></label>
+          <label class="lbl" style="flex: 1 1 220px;">Email<input class="inp" type="email" autocomplete="email"><span class="hint">We reply to this address.</span></label>
+        </div>
+        <label class="lbl">Subject<input class="inp" placeholder="A short summary"></label>
+        <label class="lbl">How can we help?<textarea class="inp" style="height: 150px; padding: 10px 12px; resize: vertical;" placeholder="Steps, error messages, employee IDs: anything that helps us look into it"></textarea></label>
+        <button onClick="{{send}}" style="align-self: flex-start; height: 46px; padding: 0 22px; border: 0; border-radius: 8px; background: #0c8577; color: #fff; font: inherit; font-size: 15px; font-weight: 600;">Send request</button>
+      </section>
+    </sc-if>
+    <sc-if value="{{done}}" hint-placeholder-val="{{false}}">
+      <section style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 28px; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; text-align: center;">
+        <span style="width: 52px; height: 52px; border-radius: 999px; background: #e8f7ee; color: #1a7f45; font-size: 26px; display: flex; align-items: center; justify-content: center;">✓</span>
+        <h1 style="margin: 0; font-size: 22px; font-weight: 700;">Request sent</h1>
+        <p style="margin: 0; font-size: 15px; color: #505756; max-width: 420px;">Your ticket number is <b style="color: #1d2026;">#29</b>. We have emailed you a copy; reply to that email to add anything.</p>
+        <button onClick="{{again}}" style="margin-top: 6px; border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; color: #0a6f63; cursor: pointer;">Send another request</button>
+      </section>
+    </sc-if>
+    <p style="margin: 16px 0 0; text-align: center; font-size: 12px; color: #868e96;">Powered by Helpdesk</p>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { done: false }; }
+  renderVals() {
+    return { form: !this.state.done, done: this.state.done, send: () => this.setState({ done: true }), again: () => this.setState({ done: false }) };
+  }
+}
+</script>
+</body>
+</html>

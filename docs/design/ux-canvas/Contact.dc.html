@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Contact page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+a { color: #0a6f63; } a:hover { color: #053c36; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+*::-webkit-scrollbar-thumb:hover { background: #9aa1ab; }
+.ic { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nav { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px; border-radius: 8px; color: #afc2d6; font-size: 14px; font-weight: 500; text-decoration: none; }
+.nav.on { background: rgba(255,255,255,0.14); color: #fff; box-shadow: inset 3px 0 0 #added9; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.dot { width: 7px; height: 7px; border-radius: 999px; flex: none; }
+.row { display: grid; grid-template-columns: 52px minmax(0, 1fr) 170px 92px 150px 80px; align-items: center; column-gap: 12px; height: 44px; padding: 0 16px; border-bottom: 1px solid #e5e7eb; font-size: 13px; color: #212529; text-decoration: none; }
+.row:hover { background: #f5f6f8; }
+.kv { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 8px; font-size: 13px; padding: 6px 0; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #212529; font: inherit; font-size: 13px; font-weight: 500; text-decoration: none; }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <aside style="flex: 0 0 232px; display: flex; flex-direction: column; gap: 4px; padding: 16px 12px; background: #053c36; box-sizing: border-box; overflow-y: auto;">
+    <img src="/_blob/8bf4d583b302740e0d6706384007c2fa" alt="Helpdesk" style="height: 32px; width: auto; align-self: flex-start; margin: 4px 4px 20px;">
+    <a class="nav" href="Home.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Home</a>
+    <a class="nav" href="Main.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>Tickets</a>
+    <a class="nav on" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Contacts</a>
+    <a class="nav" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 12h4"></path><path d="M10 8h4"></path><path d="M14 21v-3a2 2 0 0 0-4 0v3"></path><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path></svg>Companies</a>
+  </aside>
+  <div style="flex: 999 1 560px; min-width: 0; min-height: 0; overflow-y: auto; display: flex; flex-direction: column;">
+    <header style="position: sticky; top: 0; z-index: 6; flex: none; display: flex; align-items: center; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box; gap: 16px;">
+      <span style="display: flex; align-items: center; width: 420px; max-width: 100%; height: 36px; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;">Search tickets</span>
+      <div style="flex-grow: 1;"></div>
+      <div style="width: 32px; height: 32px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">HP</div>
+    </header>
+    <section style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 18px 24px; background: #fff; border-bottom: 1px solid #e5e7eb;">
+      <span style="width: 52px; height: 52px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center;">AM</span>
+      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+        <div style="font-size: 12px; color: #676d7b;"><a href="Contact.dc.html" style="color: #676d7b;">Contacts</a> / Arjun Mehta</div>
+        <h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1d2026;">Arjun Mehta</h1>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: #505756;"><span>HR Manager at <a href="Contact.dc.html">Acme Corp</a></span><span>arjun.mehta@acme.test</span><span>+91 98727 79594</span></div>
+      </div>
+      <div style="flex-grow: 1;"></div>
+      <a class="btn" href="NewTicket.dc.html" style="background: #0c8577; border-color: #0c8577; color: #fff;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>New ticket</a>
+      <a class="btn" href="#edit"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg>Edit</a>
+      <button class="btn" aria-label="More actions" style="width: 34px; padding: 0; justify-content: center;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
+    </section>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 18px 24px 24px; align-items: flex-start;">
+      <section style="flex: 999 1 560px; min-width: 0; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px;"><h2 style="margin: 0; font-size: 15px; font-weight: 700;">Tickets <span style="color: #676d7b; font-weight: 500;">3</span></h2><span style="font-size: 12px; color: #676d7b;">Newest first</span></div>
+        <div style="overflow-x: auto;"><div style="min-width: 720px;">
+          <div class="row" style="height: 32px; background: #f5f6f8; font-size: 11px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em;"><span>#</span><span>SUBJECT</span><span>STATUS</span><span>PRIORITY</span><span>ASSIGNEE</span><span>UPDATED</span></div>
+          <a class="row" href="TicketPage.dc.html"><span style="color: #676d7b;">#2</span><b style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">October payslips show wrong PF deduction</b><span><span class="pill" style="background: #e7f1ff; color: #1d5fd1;"><span class="dot" style="background: #2f7cf6;"></span>Open</span></span><span style="display: inline-flex; align-items: center; gap: 6px;"><span class="dot" style="background: #f08c00;"></span>High</span><span>Ravi Kumar</span><span style="color: #676d7b; font-size: 12px;">19m ago</span></a>
+          <a class="row" href="TicketPage.dc.html"><span style="color: #676d7b;">#18</span><b style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Upgrade to Premium plan for 400 employees</b><span><span class="pill" style="background: #fff4e0; color: #a35a00;"><span class="dot" style="background: #f08c00;"></span>Pending</span></span><span style="display: inline-flex; align-items: center; gap: 6px;"><span class="dot" style="background: #2f7cf6;"></span>Medium</span><span>Hari Prasath</span><span style="color: #676d7b; font-size: 12px;">23m ago</span></a>
+          <a class="row" href="TicketPage.dc.html"><span style="color: #676d7b;">#22</span><span style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #505756;">Wrong PF amount on payslip</span><span><span class="pill" style="background: #f1f3f5; color: #495057;">Merged into #2</span></span><span style="display: inline-flex; align-items: center; gap: 6px;"><span class="dot" style="background: #2f7cf6;"></span>Medium</span><span style="color: #676d7b;">–</span><span style="color: #676d7b; font-size: 12px;">25m ago</span></a>
+        </div></div>
+      </section>
+      <aside style="flex: 1 1 280px; max-width: 340px; padding: 12px 16px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+        <h2 style="margin: 0 0 6px; font-size: 14px; font-weight: 700;">Details</h2>
+        <div class="kv"><span style="color: #676d7b;">Company</span><a href="Contact.dc.html">Acme Corp</a></div>
+        <div class="kv"><span style="color: #676d7b;">Job title</span><span>HR Manager</span></div>
+        <div class="kv"><span style="color: #676d7b;">Other emails</span><span style="color: #676d7b;">None</span></div>
+        <div class="kv"><span style="color: #676d7b;">Plan</span><span>Premium</span></div>
+        <div class="kv"><span style="color: #676d7b;">Added</span><span>28 Oct 2026</span></div>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

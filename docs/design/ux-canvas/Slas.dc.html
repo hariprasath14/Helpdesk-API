@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SLA policies</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; } *::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #212529; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn.primary { border-color: #0c8577; background: #0c8577; color: #fff; }
+.dot { width: 8px; height: 8px; border-radius: 999px; flex: none; }
+.mini { display: grid; grid-template-columns: 90px repeat(3, minmax(0, 1fr)); gap: 6px 12px; font-size: 12px; }
+.mini .h { font-size: 11px; font-weight: 600; color: #676d7b; }
+.tok { display: inline-flex; align-items: center; justify-content: space-between; gap: 6px; padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; font-size: 13px; }
+.trow { display: grid; grid-template-columns: 110px repeat(3, minmax(0, 1fr)); gap: 10px; align-items: center; padding: 8px 14px; border-top: 1px solid #e5e7eb; font-size: 13px; }
+</style>
+</helmet>
+<div style="position: relative; display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <dc-import name="Sidebar" active="Settings" hint-size="232px,100%"></dc-import>
+  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+    <header style="flex: none; display: flex; align-items: center; gap: 16px; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;">
+      <span style="display: flex; align-items: center; width: 420px; max-width: 100%; height: 36px; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;">Search tickets</span>
+      <div style="flex-grow: 1;"></div>
+      <span style="width: 32px; height: 32px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">HP</span>
+    </header>
+    <div style="flex: 1; min-height: 0; display: flex;">
+      <dc-import name="SettingsMenu" active="SLAs" hint-size="220px,100%"></dc-import>
+      <main style="flex: 1; min-width: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: 22px 28px 24px; box-sizing: border-box;">
+        <div style="display: flex; align-items: center; gap: 10px;"><h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1d2026;">SLA policies</h1><span style="font-size: 13px; color: #676d7b;">2 policies</span><div style="flex-grow: 1;"></div><button class="btn primary" onClick="{{open}}">+ New policy</button></div>
+        <p style="margin: 0; font-size: 13px; color: #505756;">Each ticket follows the first policy whose conditions match, otherwise the default. Business hours are set in <a href="#hours" style="color: #0a6f63;">Business hours</a>. Changes apply to due times worked out from now on.</p>
+        <sc-for list="{{policies}}" as="p" hint-placeholder-count="2">
+          <article style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span aria-label="Drag to reorder" style="color: #adb5bd;">⋮⋮</span>
+              <button onClick="{{open}}" style="border: 0; background: none; padding: 0; font: inherit; font-size: 15px; font-weight: 700; color: #0a6f63; cursor: pointer;">{{p.name}}</button>
+              <span style="font-size: 12px; color: #676d7b;">{{p.applies}}</span>
+              <div style="flex-grow: 1;"></div><button class="btn" aria-label="More actions" style="width: 34px; padding: 0; justify-content: center;">⋯</button>
+            </div>
+            <div class="mini">
+              <span class="h">PRIORITY</span><span class="h">FIRST REPLY</span><span class="h">RESOLVE</span><span class="h">HOURS</span>
+              <sc-for list="{{p.rows}}" as="r" hint-placeholder-count="4">
+                <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><span class="dot" style="{{r.dot}}"></span>{{r.prio}}</span><span>{{r.reply}}</span><span>{{r.resolve}}</span><span style="color: #505756;">{{r.hours}}</span>
+              </sc-for>
+            </div>
+            <span style="font-size: 12px; color: #505756;">{{p.esc}}</span>
+          </article>
+        </sc-for>
+      </main>
+    </div>
+  </div>
+
+  <sc-if value="{{drawer}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; inset: 0; background: rgba(17,24,39,0.45); display: flex; justify-content: flex-end;">
+      <section style="width: 680px; max-width: 100%; height: 100%; display: flex; flex-direction: column; background: #fff;">
+        <div style="flex: none; display: flex; align-items: center; padding: 16px 20px; border-bottom: 1px solid #e5e7eb;"><h2 style="margin: 0; font-size: 17px; font-weight: 700; flex-grow: 1;">Edit Premium customers</h2><button onClick="{{close}}" aria-label="Close" style="border: 0; background: none; font-size: 20px; color: #676d7b; cursor: pointer;">×</button></div>
+        <div style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; padding: 18px 20px;">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500;">Name<input value="Premium customers" style="height: 38px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; font-size: 14px;"></label>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 14px; border-radius: 12px; background: #f5f6f8; font-size: 13px;"><b>Applies when</b><span class="tok">all ▾</span><span style="color: #505756;">of:</span><span class="tok">Tags ▾</span><span class="tok">contain any of ▾</span><span style="padding: 5px 10px; border-radius: 6px; background: #ecf7f6; color: #0a6f63; font-weight: 500;">vip ×</span><span style="color: #0a6f63; font-weight: 600;">+ condition</span></div>
+          <div>
+            <h3 style="margin: 0 0 4px; font-size: 14px; font-weight: 700;">Targets</h3>
+            <p style="margin: 0 0 8px; font-size: 12px; color: #676d7b;">A first reply is one the customer sees. Clocks pause while waiting on the customer and stop when resolved. In business hours a day is a working day.</p>
+            <div style="border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden;">
+              <div class="trow" style="border-top: 0; background: #f5f6f8; font-size: 11px; font-weight: 600; color: #676d7b;"><span>PRIORITY</span><span>FIRST REPLY WITHIN</span><span>RESOLVE WITHIN</span><span>HOURS THAT COUNT</span></div>
+              <div class="trow"><span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><span class="dot" style="background: #e03131;"></span>Urgent</span><span class="tok">30 minutes ▾</span><span class="tok">2 hours ▾</span><span class="tok">Round the clock ▾</span></div>
+              <div class="trow"><span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><span class="dot" style="background: #f08c00;"></span>High</span><span class="tok">1 hour ▾</span><span class="tok">8 hours ▾</span><span class="tok">Business hours ▾</span></div>
+              <div class="trow"><span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><span class="dot" style="background: #2f7cf6;"></span>Medium</span><span class="tok">4 hours ▾</span><span class="tok">1 day ▾</span><span class="tok">Business hours ▾</span></div>
+              <div class="trow"><span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600;"><span class="dot" style="background: #868e96;"></span>Low</span><span class="tok">8 hours ▾</span><span class="tok">3 days ▾</span><span class="tok">Business hours ▾</span></div>
+            </div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 14px; border-radius: 12px; background: #f5f6f8; font-size: 13px;"><b>Warning and escalation:</b><span style="color: #505756;">warn</span><span class="tok">10 minutes ▾</span><span style="color: #505756;">before a deadline; when missed, reassign to</span><span class="tok">a lead of its team ▾</span></div>
+        </div>
+        <div style="flex: none; display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-top: 1px solid #e5e7eb;"><span style="flex-grow: 1; font-size: 12px; color: #676d7b;">No changes yet</span><button class="btn" onClick="{{close}}">Cancel</button><button class="btn primary" onClick="{{close}}">Save policy</button></div>
+      </section>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { drawer: false }; }
+  renderVals() {
+    const dot = { Urgent: 'background:#e03131', High: 'background:#f08c00', Medium: 'background:#2f7cf6', Low: 'background:#868e96' };
+    const rows = (t) => t.map(([prio, reply, resolve, hours]) => ({ prio, reply, resolve, hours, dot: dot[prio] }));
+    return {
+      policies: [
+        { name: 'Premium customers', applies: 'When tags contain vip', esc: 'Warn 10 minutes before a deadline; when missed, reassign to a lead of its team.', rows: rows([['Urgent', '30 min', '2 h', 'Round the clock'], ['High', '1 h', '8 h', 'Business hours'], ['Medium', '4 h', '1 day', 'Business hours'], ['Low', '8 h', '3 days', 'Business hours']]) },
+        { name: 'Default policy', applies: 'Every ticket no other policy matches', esc: 'Warn 10 minutes before a deadline; when missed, tell the team leads.', rows: rows([['Urgent', '1 h', '4 h', 'Business hours'], ['High', '4 h', '1 day', 'Business hours'], ['Medium', '8 h', '3 days', 'Business hours'], ['Low', '1 day', '5 days', 'Business hours']]) },
+      ],
+      drawer: this.state.drawer,
+      open: () => this.setState({ drawer: true }),
+      close: () => this.setState({ drawer: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

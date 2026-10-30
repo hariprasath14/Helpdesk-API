@@ -1,0 +1,55 @@
+# TEMPORARY dev setup: what the dev site does for every address, shared by the server's
+# Caddyfile and the local rehearsal (Caddyfile.rehearsal).
+
+# The app: open, with no dev password (owner's decision, 2026-10-27); the API's own sign-in and
+# sign-up rate limits apply. /api, /socket.io and the API docs go to the API, and every other path is the web
+# app (one page app: unknown paths load index.html).
+(app) {
+	encode zstd gzip
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+	# Only the public web form (F16) may be shown inside another site's page (the embed code);
+	# every other page refuses to be framed.
+	@embeddable path /support
+	header @embeddable Content-Security-Policy "frame-ancestors *"
+	@notEmbeddable not path /support
+	header @notEmbeddable X-Frame-Options DENY
+
+	handle /api/* {
+		reverse_proxy api:4000
+	}
+	# Live updates (F26): Socket.IO, long polling and WebSocket.
+	handle /socket.io/* {
+		reverse_proxy api:4000
+	}
+	handle /health {
+		reverse_proxy api:4000
+	}
+	handle /docs* {
+		reverse_proxy api:4000
+	}
+	handle {
+		root * /srv/web/current
+		# Built files have a content hash in their name, so browsers may keep them for a year;
+		# index.html is checked on every visit so a deploy shows at once.
+		@hashed path /assets/*
+		header @hashed Cache-Control "public, max-age=31536000, immutable"
+		@page not path /assets/*
+		header @page Cache-Control "no-cache"
+		try_files {path} /index.html
+		file_server
+	}
+}
+
+# The test mailbox (Mailpit), behind the shared dev password: it holds every password-reset and
+# invite link dev sends.
+(mailbox) {
+	basic_auth {
+		{$SITE_USER} {$SITE_PASSWORD_HASH}
+	}
+	reverse_proxy mailpit:8025
+}

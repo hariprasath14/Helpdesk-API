@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Phone settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+.grp { padding: 16px 16px 6px; font-size: 12px; font-weight: 600; color: #676d7b; letter-spacing: 0.04em; }
+.item { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 52px; padding: 0 16px; border: 0; border-bottom: 1px solid #e5e7eb; background: #fff; font: inherit; font-size: 15px; color: #212529; text-align: left; }
+.day { display: flex; align-items: center; gap: 10px; min-height: 52px; border-bottom: 1px solid #e5e7eb; font-size: 15px; }
+.time { padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; }
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; display: flex; flex-direction: column; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <header style="flex: none; display: flex; align-items: center; gap: 8px; height: 56px; padding: 0 8px; background: #fff; border-bottom: 1px solid #e5e7eb;">
+    <sc-if value="{{inPage}}" hint-placeholder-val="{{false}}"><button onClick="{{back}}" aria-label="Back to settings" style="width: 44px; height: 44px; border: 0; background: none; font-size: 20px; color: #505756;">←</button></sc-if>
+    <sc-if value="{{inList}}" hint-placeholder-val="{{true}}"><span style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #505756;">☰</span></sc-if>
+    <b style="font-size: 17px; flex-grow: 1;">{{title}}</b>
+  </header>
+  <sc-if value="{{inList}}" hint-placeholder-val="{{true}}">
+    <div style="flex: 1; overflow-y: auto; padding-bottom: 24px;">
+      <div class="grp">TEAM</div><button class="item">Members<span style="color: #adb5bd;">›</span></button><button class="item">Teams<span style="color: #adb5bd;">›</span></button>
+      <div class="grp">TICKETS</div><button class="item">Fields<span style="color: #adb5bd;">›</span></button><button class="item">Canned responses<span style="color: #adb5bd;">›</span></button>
+      <div class="grp">AUTOMATION</div><button class="item">Rules<span style="color: #adb5bd;">›</span></button><button class="item">SLAs<span style="color: #adb5bd;">›</span></button><button class="item" onClick="{{openHours}}">Business hours<span style="color: #adb5bd;">›</span></button>
+      <div class="grp">CHANNELS</div><button class="item">Email<span style="color: #adb5bd;">›</span></button><button class="item">Web form<span style="color: #adb5bd;">›</span></button>
+      <div class="grp">WORKSPACE</div><button class="item">Security<span style="color: #adb5bd;">›</span></button><button class="item">Audit log<span style="color: #adb5bd;">›</span></button>
+    </div>
+  </sc-if>
+  <sc-if value="{{inPage}}" hint-placeholder-val="{{false}}">
+    <div style="flex: 1; overflow-y: auto; padding: 14px 16px 110px; background: #fff;">
+      <p style="margin: 0 0 10px; font-size: 14px; color: #505756;">SLA clocks set to business hours count only these hours, in Asia/Kolkata time.</p>
+      <div class="day"><input type="checkbox" checked style="accent-color: #0c8577; width: 20px; height: 20px;"><span style="flex: 1;">Monday</span><span class="time">09:00</span>–<span class="time">18:00</span></div>
+      <div class="day"><input type="checkbox" checked style="accent-color: #0c8577; width: 20px; height: 20px;"><span style="flex: 1;">Tuesday</span><span class="time">09:00</span>–<span class="time">18:00</span></div>
+      <div class="day"><input type="checkbox" checked style="accent-color: #0c8577; width: 20px; height: 20px;"><span style="flex: 1;">Wednesday</span><span class="time">09:00</span>–<span class="time">18:00</span></div>
+      <div class="day"><input type="checkbox" checked style="accent-color: #0c8577; width: 20px; height: 20px;"><span style="flex: 1;">Thursday</span><span class="time">09:00</span>–<span class="time">18:00</span></div>
+      <div class="day"><input type="checkbox" checked style="accent-color: #0c8577; width: 20px; height: 20px;"><span style="flex: 1;">Friday</span><span class="time">09:00</span>–<span class="time">18:00</span></div>
+      <div class="day"><input type="checkbox" checked style="accent-color: #0c8577; width: 20px; height: 20px;"><span style="flex: 1;">Saturday</span><span class="time" style="border-color: #0c8577; background: #ecf7f6;">10:00</span>–<span class="time" style="border-color: #0c8577; background: #ecf7f6;">14:00</span></div>
+      <div class="day"><input type="checkbox" style="accent-color: #0c8577; width: 20px; height: 20px;"><span style="flex: 1;">Sunday</span><span style="color: #676d7b;">Closed</span></div>
+      <h3 style="margin: 18px 0 6px; font-size: 15px;">Holidays</h3>
+      <div class="day"><span style="flex: 1;">Diwali</span><span style="color: #676d7b;">Sun, 8 Nov 2026</span></div>
+      <div class="day"><span style="flex: 1;">Christmas</span><span style="color: #676d7b;">Fri, 25 Dec 2026</span></div>
+    </div>
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 8px; padding: 10px 12px 14px; background: #ecf7f6; border-top: 1px solid #added9;">
+      <button onClick="{{back}}" style="flex: 1; height: 46px; border: 1px solid #d1d5db; border-radius: 10px; background: #fff; font: inherit; font-size: 15px; font-weight: 500;">Discard</button>
+      <button onClick="{{back}}" style="flex: 2; height: 46px; border: 0; border-radius: 10px; background: #0c8577; color: #fff; font: inherit; font-size: 15px; font-weight: 600;">Save · 1 change</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { page: null }; }
+  renderVals() {
+    const inPage = this.state.page !== null;
+    return {
+      inPage, inList: !inPage, title: inPage ? 'Business hours' : 'Settings',
+      openHours: () => this.setState({ page: 'hours' }),
+      back: () => this.setState({ page: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>

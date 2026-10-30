@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: Satoshi; src: url("/_blob/c2f8d14f91715996350f7d5819d785c9") format("woff2"); font-weight: 300 900; }
+body { margin: 0; }
+a { color: #0a6f63; } a:hover { color: #053c36; }
+* { scrollbar-width: thin; scrollbar-color: #c9ced6 transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-thumb { background: #c9ced6; border-radius: 999px; }
+*::-webkit-scrollbar-thumb:hover { background: #9aa1ab; }
+.ic { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nav { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px; border-radius: 8px; color: #afc2d6; font-size: 14px; font-weight: 500; text-decoration: none; }
+.nav:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.nav.on { background: rgba(255,255,255,0.14); color: #fff; box-shadow: inset 3px 0 0 #added9; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.dot { width: 7px; height: 7px; border-radius: 999px; flex: none; }
+.card { display: flex; flex-direction: column; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; }
+.stat { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; text-decoration: none; color: #212529; }
+.stat:hover { border-color: #added9; }
+.ibox { width: 32px; height: 32px; border-radius: 999px; display: flex; align-items: center; justify-content: center; flex: none; }
+.line { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-top: 1px solid #e5e7eb; font-size: 13px; text-decoration: none; color: #212529; }
+.line:hover { background: #f5f6f8; }
+.muted { color: #676d7b; font-size: 12px; }
+.trunc { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; min-width: 0; }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; min-height: 640px; overflow: hidden; background: #f5f6f8; font-family: Satoshi, system-ui, sans-serif; color: #212529;">
+  <aside style="flex: 0 0 232px; display: flex; flex-direction: column; gap: 4px; padding: 16px 12px; background: #053c36; box-sizing: border-box; overflow-y: auto;">
+    <img src="/_blob/8bf4d583b302740e0d6706384007c2fa" alt="Helpdesk" style="height: 32px; width: auto; align-self: flex-start; margin: 4px 4px 20px;">
+    <a class="nav on" href="Home.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Home</a>
+    <a class="nav" href="Main.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>Tickets</a>
+    <a class="nav" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Contacts</a>
+    <a class="nav" href="Contact.dc.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 12h4"></path><path d="M10 8h4"></path><path d="M14 21v-3a2 2 0 0 0-4 0v3"></path><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path></svg>Companies</a>
+    <div style="flex-grow: 1;"></div>
+    <a class="nav" href="#settings"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path><circle cx="12" cy="12" r="3"></circle></svg>Settings</a>
+    <a class="nav" href="#collapse"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>Collapse</a>
+  </aside>
+  <div style="flex: 999 1 560px; min-width: 0; min-height: 0; overflow-y: auto; display: flex; flex-direction: column;">
+    <header style="position: sticky; top: 0; z-index: 6; flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; height: 56px; padding: 0 24px; background: #fff; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;">
+      <label style="display: flex; align-items: center; gap: 8px; width: 420px; max-width: 100%; height: 36px; padding: 0 12px; border-radius: 8px; background: #f1f3f5; color: #676d7b; font-size: 13px; box-sizing: border-box;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg><input aria-label="Search tickets" placeholder="Search tickets" style="border: 0; background: none; font: inherit; color: #212529; outline: none; flex-grow: 1;"></label>
+      <div style="flex-grow: 1;"></div>
+      <button style="display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border: 0; border-radius: 8px; background: #0c8577; color: #fff; font: inherit; font-size: 14px; font-weight: 500;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>New<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+      <button onClick="{{toggleBell}}" aria-label="Notifications, 3 unread" aria-expanded="{{bellOpen}}" style="position: relative; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 0; border-radius: 8px; background: {{bellBg}}; color: #505756; cursor: pointer;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="width: 20px; height: 20px;"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg><span style="position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; border-radius: 999px; background: #e03131; color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center;">3</span></button>
+      <div style="display: flex; align-items: center; gap: 10px;"><div style="text-align: right; line-height: 1.2;"><div style="font-size: 13px; font-weight: 600; color: #1d2026;">Hari Prasath</div><div style="font-size: 11px; color: #676d7b;">Admin · HpTech Support</div></div><div style="width: 32px; height: 32px; border-radius: 999px; background: #d8f0ed; color: #0a6f63; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">HP</div></div>
+      <sc-if value="{{bellOpen}}" hint-placeholder-val="{{false}}">
+        <div style="position: absolute; top: 52px; right: 150px; z-index: 5; width: 380px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 12px 32px rgba(16,24,40,0.14); overflow: hidden;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px;"><b style="font-size: 14px;">Notifications</b><button style="border: 0; background: none; font: inherit; font-size: 12px; color: #0a6f63; cursor: pointer;">Mark all as read</button></div>
+          <div class="muted" style="padding: 4px 16px; font-weight: 600; letter-spacing: 0.04em; font-size: 11px;">TODAY</div>
+          <sc-for list="{{notes}}" as="n" hint-placeholder-count="4">
+            <a href="TicketPage.dc.html" class="line" style="align-items: flex-start;">
+              <span class="ibox" style="{{n.boxStyle}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{{n.icon}}"></path></svg></span>
+              <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex-grow: 1;"><b style="font-size: 13px;">{{n.title}}</b><span class="trunc" style="color: #505756;">{{n.text}}</span><span class="muted">{{n.when}}</span></span>
+              <sc-if value="{{n.unread}}" hint-placeholder-val="{{true}}"><span class="dot" style="background: #0c8577; margin-top: 6px;"></span></sc-if>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+    </header>
+
+    <main style="display: flex; flex-direction: column; gap: 18px; padding: 22px 24px 28px; box-sizing: border-box;">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;">
+        <h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #1d2026;">Good morning, Hari</h1>
+        <span class="muted" style="font-size: 13px;">HpTech Support · Thursday 29 October</span>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 16px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;">
+        <b style="font-size: 14px;">Get started</b>
+        <span class="muted">2 of 3 done</span>
+        <div style="flex: 0 0 120px; height: 6px; border-radius: 999px; background: #e5e7eb; overflow: hidden;"><div style="width: 66%; height: 100%; background: #0c8577;"></div></div>
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #1a7f45;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Team invited</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #1a7f45;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Business hours set</span>
+        <a href="#email" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>Connect your support email →</a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+        <a class="stat" href="Main.dc.html"><span style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 13px; font-weight: 500;">Assigned to you</span><span class="ibox" style="background: #ecf7f6; color: #0a6f63;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m16 11 2 2 4-4"></path><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg></span></span><span style="font-size: 28px; font-weight: 700; color: #1d2026;">3</span><span class="muted">Your unresolved tickets</span></a>
+        <a class="stat" href="Main.dc.html" style="border-color: #f3b6b6;"><span style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 13px; font-weight: 500;">Overdue</span><span class="ibox" style="background: #fdecec; color: #c42b2b;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2"></path><path d="M5 3 2 6"></path><path d="m22 6-3-3"></path></svg></span></span><span style="font-size: 28px; font-weight: 700; color: #c42b2b;">3</span><span class="muted">Past an SLA deadline</span></a>
+        <a class="stat" href="Main.dc.html"><span style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 13px; font-weight: 500;">Unassigned</span><span class="ibox" style="background: #ecf7f6; color: #0a6f63;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg></span></span><span style="font-size: 28px; font-weight: 700; color: #1d2026;">7</span><span class="muted">Waiting for someone to take them</span></a>
+        <a class="stat" href="Main.dc.html"><span style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 13px; font-weight: 500;">Waiting on customer</span><span class="ibox" style="background: #ecf7f6; color: #0a6f63;"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 22h14"></path><path d="M5 2h14"></path><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"></path><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"></path></svg></span></span><span style="font-size: 28px; font-weight: 700; color: #1d2026;">1</span><span class="muted">Your tickets waiting for a reply</span></a>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;">
+        <section class="card" style="flex: 3 1 480px; min-width: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px;"><h2 style="margin: 0; font-size: 15px; font-weight: 700;">Due soonest</h2><a href="Main.dc.html" style="font-size: 12px;">All my tickets</a></div>
+          <sc-for list="{{due}}" as="d" hint-placeholder-count="5">
+            <a class="line" href="TicketPage.dc.html">
+              <span class="muted" style="width: 36px; font-weight: 500;">{{d.num}}</span>
+              <span class="trunc" style="flex-grow: 1;"><b>{{d.subject}}</b><span class="muted">  ·  {{d.who}}</span></span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; width: 72px;"><span class="dot" style="{{d.prioDot}}"></span>{{d.prio}}</span>
+              <span class="pill" style="{{d.slaStyle}}">{{d.sla}}</span>
+            </a>
+          </sc-for>
+        </section>
+        <section class="card" style="flex: 2 1 320px; min-width: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px;"><h2 style="margin: 0; font-size: 15px; font-weight: 700;">Latest notifications</h2><button onClick="{{toggleBell}}" style="border: 0; background: none; font: inherit; font-size: 12px; color: #0a6f63; cursor: pointer;">Open the bell</button></div>
+          <sc-for list="{{notes}}" as="n" hint-placeholder-count="4">
+            <a class="line" href="TicketPage.dc.html">
+              <span class="ibox" style="{{n.boxStyle}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="{{n.icon}}"></path></svg></span>
+              <span style="display: flex; flex-direction: column; min-width: 0; flex-grow: 1;"><b class="trunc">{{n.title}}</b><span class="muted">{{n.when}}</span></span>
+            </a>
+          </sc-for>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { bellOpen: false }; }
+  renderVals() {
+    const P = { Low: '#868e96', Medium: '#2f7cf6', High: '#f08c00', Urgent: '#e03131' };
+    const SLA = { ok: 'background:#e8f7ee;color:#1a7f45', soon: 'background:#fff4e0;color:#a35a00', over: 'background:#fdecec;color:#c42b2b', paused: 'background:#f1f3f5;color:#495057' };
+    const due = [
+      ['#28', 'Manager approvals stuck in pending', 'Sneha Kapoor', 'High', 'over', 'Overdue 27m'],
+      ['#3', 'Leave balance not carried forward to 2027', 'Sneha Kapoor', 'Medium', 'paused', 'Paused · waiting'],
+      ['#18', 'Upgrade to Premium plan for 400 employees', 'Arjun Mehta', 'Medium', 'ok', 'Resolve in 2d 6h'],
+    ].map(([num, subject, who, prio, k, sla]) => ({ num, subject, who, prio, sla, prioDot: 'background:' + P[prio], slaStyle: SLA[k] }));
+    const AT = 'M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8';
+    const ASSIGN = 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 3a4 4 0 1 0 0 8a4 4 0 1 0 0-8 M16 11l2 2 4-4';
+    const CLOCK = 'M12 5a8 8 0 1 0 0 16a8 8 0 1 0 0-16 M12 9v4l2 2';
+    const notes = [
+      { title: 'Neha Iyer mentioned you on #28', text: '@Hari this is blocking Globex payroll, can you look today?', when: '2 minutes ago', icon: AT, boxStyle: 'background:#e7f1ff;color:#1d5fd1', unread: true },
+      { title: 'First reply due in 10 minutes on #6', text: 'Geofence check-in fails at the Pune warehouse', when: '6 minutes ago', icon: CLOCK, boxStyle: 'background:#fff4e0;color:#a35a00', unread: true },
+      { title: 'Neha Iyer mentioned you on #5', text: '@Hari VIP customer, please assign someone who knows the Pune setup.', when: '9 minutes ago', icon: AT, boxStyle: 'background:#e7f1ff;color:#1d5fd1', unread: true },
+      { title: 'Ticket #3 assigned to you', text: 'Neha Iyer assigned you: Leave balance not carried forward to 2027', when: '12 minutes ago', icon: ASSIGN, boxStyle: 'background:#ecf7f6;color:#0a6f63', unread: false },
+    ];
+    return {
+      due, notes, bellOpen: this.state.bellOpen,
+      bellBg: this.state.bellOpen ? '#f1f3f5' : 'transparent',
+      toggleBell: () => this.setState({ bellOpen: !this.state.bellOpen }),
+    };
+  }
+}
+</script>
+</body>
+</html>

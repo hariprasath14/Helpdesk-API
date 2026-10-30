@@ -1,0 +1,30 @@
+# Local development services only. AWS uses Aurora PostgreSQL and SES instead (see docs/ARCHITECTURE.md).
+# Start: docker compose up -d    Stop: docker compose down    Wipe data: docker compose down -v
+name: helpdesk
+
+services:
+  postgres:
+    image: postgres:16.15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_local_only
+    command: ['postgres', '-c', 'shared_preload_libraries=pg_stat_statements']
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./docker/postgres-init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d helpdesk']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:v1.32.0
+    ports:
+      - '127.0.0.1:1025:1025' # SMTP: the app sends here
+      - '127.0.0.1:8025:8025' # Web inbox: http://localhost:8025
+
+volumes:
+  postgres-data:

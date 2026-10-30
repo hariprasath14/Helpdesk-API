@@ -1,0 +1,258 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Artboard-vhbj.dc.html": {
+      "h": 600,
+      "page": "page-vsbse3",
+      "title": "Artboard 1",
+      "w": 800,
+      "x": 0,
+      "y": 0
+    },
+    "Contact.dc.html": {
+      "expand": "fill",
+      "h": 900,
+      "title": "Contact page",
+      "w": 1440,
+      "x": 1520,
+      "y": 1020
+    },
+    "Home.dc.html": {
+      "expand": "fill",
+      "h": 900,
+      "is_interactive": true,
+      "title": "Home (bell opens notifications)",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 900,
+      "is_interactive": true,
+      "title": "Ticket list",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "NewTicket.dc.html": {
+      "expand": "fill",
+      "h": 900,
+      "title": "New ticket",
+      "w": 1440,
+      "x": 0,
+      "y": 1020
+    },
+    "PhoneList.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "Phone · ticket list",
+      "w": 390,
+      "x": 3040,
+      "y": 1020
+    },
+    "PhoneTicket.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "Phone · ticket",
+      "w": 390,
+      "x": 3510,
+      "y": 1020
+    },
+    "TicketPage.dc.html": {
+      "expand": "fill",
+      "h": 900,
+      "is_interactive": true,
+      "title": "Ticket page",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "SettingsOverview.dc.html": {
+      "x": 0,
+      "y": 2440,
+      "w": 1440,
+      "h": 900,
+      "title": "Settings · overview and grouped menu",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Rules.dc.html": {
+      "x": 1520,
+      "y": 2440,
+      "w": 1440,
+      "h": 900,
+      "title": "Settings · rules (click a rule)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Slas.dc.html": {
+      "x": 3040,
+      "y": 2440,
+      "w": 1440,
+      "h": 900,
+      "title": "Settings · SLA policies (click a policy)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "PhoneSettings.dc.html": {
+      "x": 4560,
+      "y": 2440,
+      "w": 390,
+      "h": 844,
+      "title": "Phone · settings",
+      "is_interactive": true
+    },
+    "Fields.dc.html": {
+      "x": 0,
+      "y": 3460,
+      "w": 1440,
+      "h": 900,
+      "title": "Settings · fields",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Email.dc.html": {
+      "x": 1520,
+      "y": 3460,
+      "w": 1440,
+      "h": 900,
+      "title": "Settings · email",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Account.dc.html": {
+      "x": 3040,
+      "y": 3460,
+      "w": 1440,
+      "h": 900,
+      "title": "Your account · Appearance and theme",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "SignIn.dc.html": {
+      "x": 0,
+      "y": 4740,
+      "w": 1440,
+      "h": 900,
+      "title": "Sign in (same layout for sign-up, reset, two-step, invitation)",
+      "expand": "fill"
+    },
+    "WebForm.dc.html": {
+      "x": 1520,
+      "y": 4740,
+      "w": 1440,
+      "h": 900,
+      "title": "Public web form (send to see success)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "CustomerEmail.dc.html": {
+      "x": 3040,
+      "y": 4740,
+      "w": 720,
+      "h": 1500,
+      "title": "Customer email layout"
+    },
+    "Sidebar.dc.html": {
+      "x": 5100,
+      "y": 2440,
+      "w": 232,
+      "h": 900,
+      "title": "Shared · sidebar"
+    },
+    "SettingsMenu.dc.html": {
+      "x": 5412,
+      "y": 2440,
+      "w": 220,
+      "h": 760,
+      "title": "Shared · settings menu"
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-29T00:30:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "noteOrder": [
+    "title",
+    "about",
+    "foundations",
+    "settingsTitle",
+    "customerTitle"
+  ],
+  "notes": {
+    "about": {
+      "fill": "teal",
+      "text": "Same design system, data, actions and flows as today. Only density, placement and grouping change.\n\nTicket list: compact one-line rows, a Due column with the SLA chip, and views in the title menu so the table gets the full width.\n\nTicket page: one-band header, reply bar always visible, compact properties.\n\nClick around: the views menu, a ticket, the reply bar and the bell work.",
+      "w": 420,
+      "x": 4560,
+      "y": 0
+    },
+    "title": {
+      "kind": "title1",
+      "maxW": 3900,
+      "text": "UX upgrade · Agent workspace (Step 5b)",
+      "x": 0,
+      "y": -400
+    },
+    "foundations": {
+      "x": 4560,
+      "y": 560,
+      "w": 420,
+      "fill": "blue",
+      "text": "Foundations (shared chips, compact row, timeline, reply bar, rule editor, SLA table, settings menu with icons, save bar, toasts) live in Figma:\nhttps://www.figma.com/design/HFKoMs9DW2QXagSizJnBXm/Helpdesk?node-id=4003-131\n\nThese screens use exactly those pieces."
+    },
+    "settingsTitle": {
+      "x": 0,
+      "y": 2160,
+      "text": "Settings",
+      "kind": "title1",
+      "maxW": 4950
+    },
+    "customerTitle": {
+      "x": 0,
+      "y": 4460,
+      "text": "Sign-in and customer-facing",
+      "kind": "title1",
+      "maxW": 3760
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "TicketPage.dc.html",
+    "Home.dc.html",
+    "NewTicket.dc.html",
+    "Contact.dc.html",
+    "PhoneList.dc.html",
+    "PhoneTicket.dc.html",
+    "SettingsOverview.dc.html",
+    "Rules.dc.html",
+    "Slas.dc.html",
+    "PhoneSettings.dc.html",
+    "Fields.dc.html",
+    "Email.dc.html",
+    "Account.dc.html",
+    "SignIn.dc.html",
+    "WebForm.dc.html",
+    "CustomerEmail.dc.html",
+    "Sidebar.dc.html",
+    "SettingsMenu.dc.html",
+    "Artboard-vhbj.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "page-1",
+      "name": "Page 1"
+    },
+    {
+      "id": "page-vsbse3",
+      "name": "Page 2"
+    }
+  ],
+  "title": "Helpdesk UX · Agent workspace"
+}

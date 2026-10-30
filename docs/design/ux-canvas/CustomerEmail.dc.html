@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Customer email layout</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; }
+.mail { width: 600px; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; font-family: Arial, Helvetica, sans-serif; color: #212529; }
+.top { display: flex; align-items: center; gap: 10px; padding: 16px 24px; border-bottom: 1px solid #e5e7eb; }
+.logo { width: 32px; height: 32px; border-radius: 8px; border: 1px dashed #adb5bd; font-size: 9px; color: #676d7b; display: flex; align-items: center; justify-content: center; }
+.body { padding: 22px 24px; font-size: 15px; line-height: 1.6; }
+.foot { padding: 14px 24px; background: #f5f6f8; font-size: 12px; color: #676d7b; line-height: 1.5; }
+.cut { padding: 8px 24px; font-size: 11px; color: #868e96; border-bottom: 1px dashed #d1d5db; }
+.cap { width: 600px; font-family: Arial, sans-serif; font-size: 13px; font-weight: 700; color: #505756; }
+</style>
+</helmet>
+<div style="width: 720px; min-height: 1500px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 32px 0; background: #eef0f3;">
+  <div class="cap">1 · Request received</div>
+  <div class="mail">
+    <div class="cut">Reply above this line to add to your request</div>
+    <div class="top"><span class="logo">Logo</span><b style="font-size: 15px;">HpTech Support</b><span style="margin-left: auto; padding: 3px 10px; border-radius: 999px; background: #ecf7f6; color: #0a6f63; font-size: 12px; font-weight: 700;">Ticket #26</span></div>
+    <div class="body">Hi Kavya,<br><br>Thanks for contacting HpTech Support. We have received your request and will reply soon.<br><br><span style="display: block; padding: 12px 14px; border-radius: 8px; background: #f5f6f8; font-size: 14px;"><b>Payslips for 3 employees are blank</b><br><span style="color: #676d7b;">Ticket #26 · received 29 Oct, 10:02</span></span><br>To add anything, just reply to this email.</div>
+    <div class="foot">HpTech Support · hptech@in.dev.helpdesk.example.com<br>Sent by Helpdesk on behalf of HpTech Support.</div>
+  </div>
+  <div class="cap" style="margin-top: 16px;">2 · A reply from the team</div>
+  <div class="mail">
+    <div class="cut">Reply above this line</div>
+    <div class="top"><span class="logo">Logo</span><b style="font-size: 15px;">HpTech Support</b><span style="margin-left: auto; padding: 3px 10px; border-radius: 999px; background: #ecf7f6; color: #0a6f63; font-size: 12px; font-weight: 700;">Ticket #1</span></div>
+    <div class="body">Hi Rahul,<br><br>Thanks for reporting this. We can see check-ins failing for some Android phones since this morning. Our team is on it and I will update you within the hour.<br><br>Priya Nair<br><span style="color: #676d7b;">HpTech Support</span></div>
+    <div class="foot">You are receiving this because you contacted HpTech Support. Reply to this email to answer.</div>
+  </div>
+  <div class="cap" style="margin-top: 16px;">3 · Ticket resolved</div>
+  <div class="mail">
+    <div class="cut">Reply above this line to open the ticket again</div>
+    <div class="top"><span class="logo">Logo</span><b style="font-size: 15px;">HpTech Support</b><span style="margin-left: auto; padding: 3px 10px; border-radius: 999px; background: #e8f7ee; color: #1a7f45; font-size: 12px; font-weight: 700;">Resolved · #9</span></div>
+    <div class="body">Hi Deepak,<br><br>We have marked your ticket <b>#9 New joiner cannot log in</b> as resolved.<br><br>If you still need help, reply to this email and the ticket opens again.</div>
+    <div class="foot">HpTech Support · hptech@in.dev.helpdesk.example.com</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":720,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

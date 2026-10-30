@@ -1,0 +1,16 @@
+# TEMPORARY dev setup: the same site on this computer, over plain HTTP, to rehearse a deploy
+# before touching the server (README "Temporary dev server"). Browsers resolve *.localhost.
+{
+	auto_https off
+}
+
+# The shared snippets: (app) and (mailbox).
+import site.caddy
+
+http://{$HELPDESK_DOMAIN}:{$HTTP_PORT}, http://*.{$HELPDESK_DOMAIN}:{$HTTP_PORT} {
+	import app
+}
+
+http://mail.{$HELPDESK_DOMAIN}:{$HTTP_PORT} {
+	import mailbox
+}
