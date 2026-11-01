@@ -1,8 +1,81 @@
 # helpdesk-api
 
-Backend for Helpdesk, a multi-tenant SaaS help desk. "Helpdesk" is a placeholder name, set in `src/product.ts` (rename steps: helpdesk-api `docs/BRANDING.md`). Fastify + TypeScript API and pg-boss background worker, sharing one codebase. Also holds the AWS infrastructure (CDK) and the architecture docs.
+Backend for Helpnest, a multi-tenant SaaS help desk. The product name is set in `src/product.ts` (rename steps: helpdesk-api `docs/BRANDING.md`). Fastify + TypeScript API and pg-boss background worker, sharing one codebase. Also holds the AWS infrastructure (CDK) and the architecture docs.
 
-> Status: Step 0 in progress. S1 (backend base), S2 (database), S3 (test setup) and S4 (API contract) are built; the frontend and features come next. Sections fill in as each feature is built. This README is updated with every backend change.
+## About the project
+
+Helpnest is a multi-tenant help desk: support teams turn customer emails and web-form requests into tickets, work them together in real time, and automate routing and deadlines. I built it end to end as a portfolio project: product, frontend, backend, database, tests and infrastructure.
+
+**Live demo:** DEMO_LINK, no sign-up needed. It runs in your browser with sample data from a fictional bicycle shop's support team; try replying, assigning, filtering and changing settings (changes reset when you reload).
+
+| Frontend                                                                    | Backend                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [hariprasath14/Helpdesk-Web](https://github.com/hariprasath14/Helpdesk-Web) | [hariprasath14/Helpdesk-API](https://github.com/hariprasath14/Helpdesk-API) |
+
+![Ticket list with SLA countdowns, priorities and assignees](https://raw.githubusercontent.com/hariprasath14/Helpdesk-Web/main/docs/screenshots/tickets.png)
+![A ticket: the conversation, history and properties](https://raw.githubusercontent.com/hariprasath14/Helpdesk-Web/main/docs/screenshots/ticket.png)
+
+<details>
+<summary>More screenshots: home, rules, SLAs, contacts, phone, web form</summary>
+
+![Home page with counts and notifications](https://raw.githubusercontent.com/hariprasath14/Helpdesk-Web/main/docs/screenshots/home.png)
+
+![Automation rules](https://raw.githubusercontent.com/hariprasath14/Helpdesk-Web/main/docs/screenshots/rules.png)
+
+![SLA policies](https://raw.githubusercontent.com/hariprasath14/Helpdesk-Web/main/docs/screenshots/slas.png)
+
+![Contacts](https://raw.githubusercontent.com/hariprasath14/Helpdesk-Web/main/docs/screenshots/contacts.png)
+
+![Public web form](https://raw.githubusercontent.com/hariprasath14/Helpdesk-Web/main/docs/screenshots/web-form.png)
+
+<img src="https://raw.githubusercontent.com/hariprasath14/Helpdesk-Web/main/docs/screenshots/phone-tickets.png" alt="Ticket list on a phone" width="260">
+
+<img src="https://raw.githubusercontent.com/hariprasath14/Helpdesk-Web/main/docs/screenshots/phone-ticket.png" alt="A ticket on a phone" width="260">
+
+</details>
+
+### What it does
+
+- **Tickets from everywhere:** customer emails become tickets (replies thread onto the same ticket), plus a public web form and tickets agents log themselves.
+- **Teamwork:** assignment, private notes with @mentions, saved views, canned responses with placeholders, merge and split, a notification center.
+- **Real time:** lists, tickets and notifications update live; agents see who else is on a ticket before replying.
+- **Automation:** a rules engine for new tickets, updates, customer replies and schedules (routing, round-robin, tags, emails), SLA policies with business hours and holidays, warnings and escalation.
+- **Workspaces:** each company gets its own address (`acme.<domain>`), roles and permissions, teams, custom fields, two-step sign-in and an audit log.
+
+### Architecture
+
+```mermaid
+flowchart LR
+  subgraph Browser
+    Web["React app<br/>TanStack Query, typed client"]
+  end
+  subgraph Server["One Docker image"]
+    API["Fastify API<br/>REST + Socket.IO"]
+    Worker["pg-boss worker<br/>email, rules, SLA timers"]
+  end
+  DB[("PostgreSQL 16<br/>row-level security")]
+  Mail["Email<br/>SMTP / Amazon SES"]
+  Web -- "REST, cookie session" --> API
+  API -. "live signals" .-> Web
+  API --> DB
+  Worker --> DB
+  DB -. "LISTEN / NOTIFY" .-> API
+  Worker <--> Mail
+```
+
+### Engineering highlights
+
+- **Tenant isolation in the database:** every query runs with the workspace set on the connection, and PostgreSQL row-level security filters every workspace table by it, so a forgotten filter in code still cannot leak another company's data. Separate writer, reader and migration roles with least privilege.
+- **API-first and type-safe end to end:** Zod schemas on each route generate the OpenAPI contract, which generates the frontend's typed client and form validation; a contract change that breaks the frontend fails its type check.
+- **Reliable background work:** email in and out, rules, SLA clocks and notifications run as background jobs with retries on PostgreSQL (pg-boss), with no extra infrastructure.
+- **Security:** Argon2 password hashing, breached-password check, TOTP two-step sign-in with recovery codes, CSRF protection, rate limits, sanitized email HTML, an audit log of sensitive actions.
+- **Tested like a product:** about 880 unit and integration tests with coverage minimums (statements above 90%), and 24 Playwright end-to-end suites against the real API, worker and mail server, with accessibility checks (axe, WCAG 2.1 AA) at desktop and phone widths.
+- **One codebase, any environment:** settings come from validated environment variables; email, storage and payments go through adapters chosen by settings; AWS infrastructure (ECS Fargate, CDK) is written as code.
+- **The demo is the real frontend:** a seed script builds the sample workspace through the real API and saves what every screen reads; in the demo build, a service worker answers the app's API calls from that data, and a test checks it against the API contract.
+
+**Stack:** TypeScript · React 19 · Vite · TanStack Query · Tailwind CSS · Fastify · Socket.IO · PostgreSQL · Sequelize · pg-boss · Zod + OpenAPI · Vitest · Playwright · Docker · AWS CDK
+
+## Developer guide
 
 Full technical design: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Coding and security rules: [docs/ENGINEERING_STANDARDS.md](docs/ENGINEERING_STANDARDS.md). Release 1 steps and the done gate: [docs/BUILD_PLAN.md](docs/BUILD_PLAN.md). The frontend lives in the separate `helpdesk-web` repository.
 
