@@ -6,7 +6,7 @@ Backend for Helpnest, a multi-tenant SaaS help desk. The product name is set in 
 
 Helpnest is a multi-tenant help desk: support teams turn customer emails and web-form requests into tickets, work them together in real time, and automate routing and deadlines. I built it end to end as a portfolio project: product, frontend, backend, database, tests and infrastructure.
 
-**Live demo:** DEMO_LINK, no sign-up needed. It runs in your browser with sample data from a fictional bicycle shop's support team; try replying, assigning, filtering and changing settings (changes reset when you reload).
+**Live demo:** [helpdesk-demo.hari-prasath-s.workers.dev](https://helpdesk-demo.hari-prasath-s.workers.dev), no sign-up needed. It runs in your browser with sample data from a fictional bicycle shop's support team; try replying, assigning, filtering and changing settings (changes reset when you reload).
 
 | Frontend                                                                    | Backend                                                                     |
 | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
