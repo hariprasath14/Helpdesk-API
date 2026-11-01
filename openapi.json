@@ -180,8 +180,8 @@
               {
                 "type": "string",
                 "enum": [
-                  "help-teal",
-                  "ocean-cyan"
+                  "forest",
+                  "indigo"
                 ]
               },
               {
@@ -2271,8 +2271,8 @@
                   {
                     "type": "string",
                     "enum": [
-                      "help-teal",
-                      "ocean-cyan"
+                      "forest",
+                      "indigo"
                     ]
                   },
                   {

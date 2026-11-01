@@ -291,16 +291,16 @@ describe('your colour theme (Step 5b)', () => {
       (await me(owner.address, owner.cookie)).json<{ user: { theme: unknown } }>().user.theme,
     ).toBeNull();
 
-    const chosen = await update({ theme: 'ocean-cyan' });
+    const chosen = await update({ theme: 'indigo' });
     expect(chosen.statusCode).toBe(200);
     // Only the theme changes; the name stays.
     expect(chosen.json<{ user: { theme: string; name: string } }>().user).toMatchObject({
-      theme: 'ocean-cyan',
+      theme: 'indigo',
       name: 'Ravi Shankar',
     });
     // Another sign-in (another device) gets it too.
     const second = await login(owner.address, owner.email, PASSWORD);
-    expect(second.json<{ user: { theme: string } }>().user.theme).toBe('ocean-cyan');
+    expect(second.json<{ user: { theme: string } }>().user.theme).toBe('indigo');
 
     expect((await update({ theme: 'purple' })).statusCode).toBe(400);
     expect((await update({})).statusCode).toBe(400);

@@ -261,17 +261,17 @@ The breached-password check sends only the first 5 characters of the password's 
 
 Code: `src/modules/accounts/auth.service.ts` and `auth.routes.ts`. Tables: `password_history`, `password_resets`, `login_failures`.
 
-| Endpoint                                   | Address   | Limit per IP  | What it does                                                                    |
-| ------------------------------------------ | --------- | ------------- | ------------------------------------------------------------------------------- |
-| `POST /api/v1/auth/login`                  | workspace | 20 per 15 min | Signs a member in; new session every time (an existing one is deleted)          |
-| `POST /api/v1/auth/logout`                 | workspace | general       | Ends the session (needs the CSRF token while it is live) and clears the cookie  |
-| `POST /api/v1/auth/forgot-password`        | workspace | 10 an hour    | Emails a reset link to a member of this workspace; same `202` for any email     |
-| `POST /api/v1/auth/reset-password/check`   | workspace | 30 per 15 min | Is a reset link still usable? Returns the email it resets                       |
-| `POST /api/v1/auth/reset-password`         | workspace | 10 per 15 min | Sets the new password from a link                                               |
-| `POST /api/v1/auth/find-workspaces`        | main      | 5 an hour     | Emails links to every workspace the email belongs to; same `202` for any email  |
-| `PATCH /api/v1/me`                         | workspace | general       | Changes your name or your colour theme (`theme`: help-teal, ocean-cyan or null) |
-| `POST /api/v1/me/password`                 | workspace | 10 per 15 min | Changes your password (current password required)                               |
-| `POST /api/v1/me/sessions/sign-out-others` | workspace | general       | Ends every other session of yours, in every workspace                           |
+| Endpoint                                   | Address   | Limit per IP  | What it does                                                                   |
+| ------------------------------------------ | --------- | ------------- | ------------------------------------------------------------------------------ |
+| `POST /api/v1/auth/login`                  | workspace | 20 per 15 min | Signs a member in; new session every time (an existing one is deleted)         |
+| `POST /api/v1/auth/logout`                 | workspace | general       | Ends the session (needs the CSRF token while it is live) and clears the cookie |
+| `POST /api/v1/auth/forgot-password`        | workspace | 10 an hour    | Emails a reset link to a member of this workspace; same `202` for any email    |
+| `POST /api/v1/auth/reset-password/check`   | workspace | 30 per 15 min | Is a reset link still usable? Returns the email it resets                      |
+| `POST /api/v1/auth/reset-password`         | workspace | 10 per 15 min | Sets the new password from a link                                              |
+| `POST /api/v1/auth/find-workspaces`        | main      | 5 an hour     | Emails links to every workspace the email belongs to; same `202` for any email |
+| `PATCH /api/v1/me`                         | workspace | general       | Changes your name or your colour theme (`theme`: forest, indigo or null)       |
+| `POST /api/v1/me/password`                 | workspace | 10 per 15 min | Changes your password (current password required)                              |
+| `POST /api/v1/me/sessions/sign-out-others` | workspace | general       | Ends every other session of yours, in every workspace                          |
 
 1. **Login:** wrong password, unknown email, unconfirmed account and "not a member of this workspace" all answer `401 INVALID_CREDENTIALS` and take the same time (a decoy hash runs for unknown emails).
 2. **Lockout:** each failure is recorded by the email typed (`login_failures`), whether or not it has an account. 5 failures within 15 minutes lock that email until 15 minutes after the last one (`429 LOGIN_LOCKED`, with `retryAfterSeconds`); attempts while locked are not counted. A successful login or a password reset clears the count; rows older than a day are deleted as new failures come in.

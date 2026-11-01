@@ -23,11 +23,11 @@ function layout(
 ) {
   const body = paragraphs.map((p) => `<p style="margin:0 0 16px">${p}</p>`).join('');
   const action = button
-    ? `<p style="margin:24px 0"><a href="${escapeHtml(button.url)}" style="background:#0c8577;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block">${escapeHtml(button.label)}</a></p>`
+    ? `<p style="margin:24px 0"><a href="${escapeHtml(button.url)}" style="background:#2b7343;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block">${escapeHtml(button.label)}</a></p>`
     : '';
   return `<!doctype html><html><body style="margin:0;background:#f5f6f8;font-family:Arial,sans-serif;color:#212529">
 <div style="max-width:520px;margin:32px auto;background:#ffffff;border-radius:12px;padding:32px">
-<p style="margin:0 0 24px;font-size:20px;font-weight:bold;color:#002535">${escapeHtml(PRODUCT_NAME)}</p>
+<p style="margin:0 0 24px;font-size:20px;font-weight:bold;color:#12301d">${escapeHtml(PRODUCT_NAME)}</p>
 <h1 style="font-size:20px;margin:0 0 16px;color:#1d2026">${escapeHtml(heading)}</h1>${body}${action}
 <p style="margin:24px 0 0;font-size:12px;color:#676d7b">${reason}</p>
 </div></body></html>`;
@@ -176,7 +176,7 @@ export function yourWorkspacesEmail(input: {
         `You can sign in to these ${PRODUCT_NAME} workspaces:`,
         ...workspaces.map(
           (workspace) =>
-            `<a href="${escapeHtml(workspace.loginUrl)}" style="color:#0c8577;font-weight:bold">${escapeHtml(workspace.name)}</a><br><span style="color:#676d7b">${escapeHtml(workspace.loginUrl)}</span>`,
+            `<a href="${escapeHtml(workspace.loginUrl)}" style="color:#2b7343;font-weight:bold">${escapeHtml(workspace.name)}</a><br><span style="color:#676d7b">${escapeHtml(workspace.loginUrl)}</span>`,
         ),
         'If you did not ask for this list, you can ignore this email.',
       ],

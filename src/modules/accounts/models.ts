@@ -32,7 +32,7 @@ export interface CustomerNotificationSettings {
 }
 
 /** The colour themes a person can choose (the web app's brand packs). */
-export const THEMES = ['help-teal', 'ocean-cyan'] as const;
+export const THEMES = ['forest', 'indigo'] as const;
 export type Theme = (typeof THEMES)[number];
 
 function defineModels(sequelize: Sequelize) {

@@ -161,11 +161,11 @@ export function assignmentEmail(input: {
     ].join('\n'),
     html: `<!doctype html><html><body style="margin:0;background:#f5f6f8;font-family:Arial,sans-serif;color:#212529">
 <div style="max-width:520px;margin:32px auto;background:#ffffff;border-radius:12px;padding:32px">
-<p style="margin:0 0 24px;font-size:20px;font-weight:bold;color:#002535">${escapeHtml(PRODUCT_NAME)}</p>
+<p style="margin:0 0 24px;font-size:20px;font-weight:bold;color:#12301d">${escapeHtml(PRODUCT_NAME)}</p>
 <p style="margin:0 0 16px">Hi ${escapeHtml(name)},</p>
 <p style="margin:0 0 16px">${escapeHtml(assignedBy)} assigned you ticket <strong>${escapeHtml(ref)}</strong> in ${escapeHtml(workspaceName)}:</p>
 <p style="margin:0 0 16px;font-size:16px;font-weight:bold">${escapeHtml(subject)}</p>
-<p style="margin:24px 0"><a href="${escapeHtml(link)}" style="background:#0c8577;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block">Open ticket ${escapeHtml(ref)}</a></p>
+<p style="margin:24px 0"><a href="${escapeHtml(link)}" style="background:#2b7343;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block">Open ticket ${escapeHtml(ref)}</a></p>
 <p style="margin:24px 0 0;font-size:12px;color:#676d7b">You received this email because a ticket was assigned to you in ${PRODUCT_NAME}.</p>
 </div></body></html>`,
   };
@@ -258,11 +258,11 @@ export function memberNoticeEmail(input: {
     ].join('\n'),
     html: `<!doctype html><html><body style="margin:0;background:#f5f6f8;font-family:Arial,sans-serif;color:#212529">
 <div style="max-width:520px;margin:32px auto;background:#ffffff;border-radius:12px;padding:32px">
-<p style="margin:0 0 24px;font-size:20px;font-weight:bold;color:#002535">${escapeHtml(PRODUCT_NAME)}</p>
+<p style="margin:0 0 24px;font-size:20px;font-weight:bold;color:#12301d">${escapeHtml(PRODUCT_NAME)}</p>
 <p style="margin:0 0 16px">Hi ${escapeHtml(name)},</p>
 ${paragraphs(text)}
 <p style="margin:16px 0;font-size:16px;font-weight:bold">Ticket ${escapeHtml(ref)}: ${escapeHtml(ticketSubject)}</p>
-<p style="margin:24px 0"><a href="${escapeHtml(link)}" style="background:#0c8577;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block">Open ticket ${escapeHtml(ref)}</a></p>
+<p style="margin:24px 0"><a href="${escapeHtml(link)}" style="background:#2b7343;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block">Open ticket ${escapeHtml(ref)}</a></p>
 <p style="margin:24px 0 0;font-size:12px;color:#676d7b">You received this email because you work tickets in ${escapeHtml(workspaceName)} on ${PRODUCT_NAME}.</p>
 </div></body></html>`,
   };
@@ -296,11 +296,11 @@ export function ruleNoticeEmail(input: {
     ].join('\n'),
     html: `<!doctype html><html><body style="margin:0;background:#f5f6f8;font-family:Arial,sans-serif;color:#212529">
 <div style="max-width:520px;margin:32px auto;background:#ffffff;border-radius:12px;padding:32px">
-<p style="margin:0 0 24px;font-size:20px;font-weight:bold;color:#002535">${escapeHtml(PRODUCT_NAME)}</p>
+<p style="margin:0 0 24px;font-size:20px;font-weight:bold;color:#12301d">${escapeHtml(PRODUCT_NAME)}</p>
 <p style="margin:0 0 16px">Hi ${escapeHtml(name)},</p>
 ${paragraphs(text)}
 <p style="margin:16px 0;font-size:16px;font-weight:bold">Ticket ${escapeHtml(ref)}: ${escapeHtml(subject)}</p>
-<p style="margin:24px 0"><a href="${escapeHtml(link)}" style="background:#0c8577;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block">Open ticket ${escapeHtml(ref)}</a></p>
+<p style="margin:24px 0"><a href="${escapeHtml(link)}" style="background:#2b7343;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block">Open ticket ${escapeHtml(ref)}</a></p>
 <p style="margin:24px 0 0;font-size:12px;color:#676d7b">Sent by the rule "${escapeHtml(ruleName)}" in ${escapeHtml(workspaceName)}.</p>
 </div></body></html>`,
   };

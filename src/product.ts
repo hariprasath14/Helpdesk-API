@@ -4,4 +4,4 @@
  * actor and the reserved workspace addresses all read it from here. The web app has the same
  * constant in its src/product.ts; change both (docs/BRANDING.md has the steps).
  */
-export const PRODUCT_NAME = 'Helpdesk';
+export const PRODUCT_NAME = 'Helpnest';
